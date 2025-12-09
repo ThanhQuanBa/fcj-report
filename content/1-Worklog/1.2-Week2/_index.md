@@ -1,6 +1,5 @@
 ---
 title: "Week 2 Worklog"
-date: "2025-09-15"
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
@@ -8,41 +7,25 @@ pre: " <b> 1.2. </b> "
 
 ### Week 2 Objectives:
 
-* Set up Hybrid DNS with Route 53 Resolver.
-* Set up VPC peering
+- Understand the role and operation of the virtual server service **EC2** (Elastic Compute Cloud).
+- Become proficient in launching, managing, and terminating an EC2 instance.
+- Master the concept and usage of **IAM Roles** to grant secure access to EC2 resources.
+- Use **AWS CLI** to perform basic EC2 management operations.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 1   | - Deploy Amazon EC2 instances and core networking <br>&emsp;+ Create EC2 server and test connectivity <br>&emsp;+ Configure NAT Gateway and use Reachability Analyzer <br>&emsp;+ Create EC2 Instance Connect Endpoint and use Systems Manager Session Manager <br>&emsp;+ Enable CloudWatch monitoring and alerts <br>&emsp;+ Set up Site-to-Site VPN (create VGW, CGW, VPN connection) and configure customer gateway <br>&emsp;+ Modify VPN tunnels, explore alternative VPN setups, and troubleshoot VPN issues | 15/09/2025 | 15/09/2025 | <https://000003.awsstudygroup.com/> |
-| 2   | - Build VPN connection using Strongswan and Transit Gateway <br>&emsp;+ Create Transit Gateway and attachments <br>&emsp;+ Configure route tables and customer gateway <br>&emsp;+ Clean up resources after testing <br>&emsp;+ Set up Hybrid DNS with Route 53 Resolver and review Route 53 basics |16/09/2025 | 16/09/2025      | <https://000003.awsstudygroup.com/> <br> <https://000004.awsstudygroup.com/>|
-| 3   | - Prepare Amazon Route 53 and related infrastructure <br>&emsp;+ Generate key pairs and initialize CloudFormation templates <br>&emsp;+ Configure security groups and connect to RDGW <br>&emsp;+ Deploy Microsoft AD and set up DNS <br>&emsp;+ Create Route 53 outbound/inbound endpoints and resolver rules <br>&emsp;+ Test DNS resolution and clean up resources | 17/09/2025 | 17/09/2025 | <https://000004.awsstudygroup.com/> |
-| 4   | - Set up VPC peering and cross-VPC connectivity <br>&emsp;+ Review prerequisites and initialize CloudFormation templates <br>&emsp;+ Create security groups and EC2 instances as needed <br>&emsp;+ Update Network ACLs, configure route tables and enable cross-peer DNS <br>&emsp;+ Cleanup resources after validation | 18/09/2025 | 18/09/2025 | <https://000019.awsstudygroup.com/> |
-| 5   | - Hands-on practices: <br>&emsp;+ Create and configure EC2 server <br>&emsp;+ Test connectivity to EC2 instances <br>&emsp;+ Set up Hybrid DNS with Route 53 Resolver <br>&emsp;+ Explore Amazon Route 53 features <br>&emsp;+ Generate key pairs and validate readiness for Route 53 | 19/09/2025 | 19/09/2025 | |
-### 🏆 **Week 2 Achievements**
+### Tasks to be completed this week:
 
-**1. EC2 Deployment & Core Networking**
+| Day | Task                                                                                                                                                                                                                                                                         | Start Date | Completion Date | Reference Materials                       |
+| :-- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------- | :-------------- | :---------------------------------------- |
+| 2   | - Read and understand core components of **Amazon EC2** (AMI, Instance Type, Key Pair, Security Group). <br> - **Practice:** Launch the first EC2 Instance (Free Tier type).                                                                                                 | 15/09/2025 | 15/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Learn about secure access control using **IAM Roles for EC2** (Instance Profile). <br> - **Practice:** <br>&emsp; + Create an IAM Policy allowing `s3:ListBucket`. <br>&emsp; + Create an IAM Role and attach the policy. <br>&emsp; + Assign the Role to an EC2 Instance. | 16/09/2025 | 16/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Learn EC2 management commands using **AWS CLI**. <br> - **Practice:** <br>&emsp; + Use CLI to view EC2 instance info (`describe-instances`). <br>&emsp; + Use CLI to Stop/Start an Instance. <br>&emsp; + Manage Security Groups via CLI.                                  | 17/09/2025 | 17/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - **Integration Practice:** Verify IAM Role permissions. <br> - Connect to the EC2 instance via SSH/Session Manager. <br> - **Practice:** Run `aws s3 ls` from inside EC2 to verify it can list S3 Buckets (confirming IAM Role works).                                      | 18/09/2025 | 18/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Lifecycle & Cost Management:** <br> - Review EC2 lifecycle states (Pending, Running, Stopping, Terminated). <br> - **Practice:** <br>&emsp; + **Terminate** the EC2 Instance. <br>&emsp; + Delete created IAM Roles and Policies for resource cleanup.                   | 19/09/2025 | 19/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
-- Deployed Amazon EC2 instances and validated connectivity.
-- Configured NAT Gateway and used Reachability Analyzer to verify routing.
-- Enabled EC2 Instance Connect and Systems Manager Session Manager for access; set up CloudWatch monitoring and alerts.
+### Week 2 Achievements:
 
-**2. Site-to-Site VPN**
-
-- Established Site-to-Site VPN components (Virtual Private Gateway, Customer Gateway and VPN connection).
-- Modified and tested VPN tunnels; applied troubleshooting steps to resolve connectivity issues.
-
-**3. Transit Gateway & StrongSwan VPN**
-
-- Built VPN using StrongSwan with Transit Gateway; created TGW and attachments.
-- Configured route tables and customer gateway settings; validated cross-VPC routing.
-
-**4. Route 53 & Microsoft AD**
-
-- Deployed Microsoft AD and configured Route 53: created inbound/outbound endpoints and resolver rules.
-- Tested DNS resolution across environments and verified connectivity.
-
-**5. VPC Peering & Hands-on Practice**
-
-- Implemented VPC peering and configured cross-peer DNS; validated networking and DNS across peered VPCs.
-- Completed hands-on tasks: EC2 setup, connectivity testing, Hybrid DNS configuration, and key-pair validation.
+- **EC2:** Gained a solid understanding of how to create, configure, and manage the lifecycle of EC2 Instances via both Console and CLI. Clearly understood the components that make up an EC2 instance.
+- **IAM Roles:** Learned the benefits and usage of **IAM Roles** (Instance Profile) to securely grant AWS service permissions to EC2 without the need for storing Access Keys on servers.
+- **Advanced AWS CLI:** Able to use CLI commands to manage EC2 instance states (Start, Stop, Describe) and perform remote operations.
+- **Integration Practice:** Successfully validated that the EC2 Instance can perform S3 actions (e.g., `aws s3 ls`) thanks to permissions granted through IAM Role—confirming the security model works effectively.
+- **Resource Cleanup:** Understood the process of terminating EC2 instances and removing related IAM resources to ensure no unwanted cost is incurred.

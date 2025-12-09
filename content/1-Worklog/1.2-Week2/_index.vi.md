@@ -1,48 +1,31 @@
 ---
 title: "Worklog Tuần 2"
-date: "2025-09-15"
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
 
-### Mục Tiêu Tuần 2:
+### Mục tiêu tuần 2:
 
-* Thiết lập Hybrid DNS với Route 53 Resolver.
-* Thiết lập VPC peering
+- Hiểu rõ vai trò và cách hoạt động của dịch vụ máy chủ ảo **EC2** (Elastic Compute Cloud).
+- Thành thạo quy trình khởi tạo, quản lý và chấm dứt (Terminate) một EC2 Instance.
+- Nắm vững khái niệm và cách sử dụng **IAM Roles** để cấp quyền truy cập an toàn cho tài nguyên EC2.
+- Sử dụng **AWS CLI** để thực hiện các thao tác quản lý EC2 cơ bản.
 
-### Các nhiệm vụ được thực hiện trong tuần này:
-| Ngày | Nhiệm vụ                                                                                                                                                                                                   | Ngày Bắt Đầu | Ngày Hoàn Thành | Tài Liệu Tham Khảo                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 1   | - Triển khai Amazon EC2 và cấu hình mạng cốt lõi <br>&emsp;+ Tạo EC2 Server và kiểm tra kết nối <br>&emsp;+ Cấu hình NAT Gateway và sử dụng Reachability Analyzer <br>&emsp;+ Tạo EC2 Instance Connect Endpoint và sử dụng Systems Manager Session Manager <br>&emsp;+ Kích hoạt CloudWatch monitoring và alerts <br>&emsp;+ Thiết lập Site-to-Site VPN (Tạo VGW, CGW, kết nối VPN) và cấu hình Customer Gateway <br>&emsp;+ Chỉnh sửa tunnel VPN, thử nghiệm cấu hình VPN thay thế và khắc phục sự cố VPN | 15/09/2025 | 15/09/2025 | <https://000003.awsstudygroup.com/> |
-| 2   | - Xây dựng kết nối VPN sử dụng Strongswan và Transit Gateway <br>&emsp;+ Tạo Transit Gateway và attachments <br>&emsp;+ Cấu hình route tables và Customer Gateway <br>&emsp;+ Dọn dẹp tài nguyên sau khi kiểm thử <br>&emsp;+ Thiết lập Hybrid DNS với Route 53 Resolver và ôn lại kiến thức Route 53 |16/09/2025 | 16/09/2025      | <https://000003.awsstudygroup.com/> <br> <https://000004.awsstudygroup.com/>|
-| 3   | - Chuẩn bị Route 53 và hạ tầng liên quan <br>&emsp;+ Tạo key pair và khởi tạo CloudFormation templates <br>&emsp;+ Cấu hình security groups và kết nối tới RDGW <br>&emsp;+ Triển khai Microsoft AD và thiết lập DNS <br>&emsp;+ Tạo Route 53 outbound/inbound endpoints và resolver rules <br>&emsp;+ Kiểm tra phân giải DNS và dọn dẹp tài nguyên | 17/09/2025 | 17/09/2025 | <https://000004.awsstudygroup.com/> |
-| 4   | - Thiết lập VPC peering và kết nối giữa các VPC <br>&emsp;+ Ôn lại yêu cầu tiên quyết và khởi tạo CloudFormation templates <br>&emsp;+ Tạo security groups và EC2 instances khi cần <br>&emsp;+ Cập nhật Network ACLs, cấu hình route tables và kích hoạt Cross-Peer DNS <br>&emsp;+ Dọn dẹp tài nguyên sau khi kiểm tra | 18/09/2025 | 18/09/2025 | <https://000019.awsstudygroup.com/> |
-| 5   | - Bài thực hành: <br>&emsp;+ Tạo và cấu hình EC2 server <br>&emsp;+ Kiểm tra kết nối tới EC2 instances <br>&emsp;+ Thiết lập Hybrid DNS với Route 53 Resolver <br>&emsp;+ Khám phá tính năng của Amazon Route 53 <br>&emsp;+ Tạo key pair và xác thực hệ thống | 19/09/2025 | 19/09/2025 | |
-### 🏆 **Thành Tựu Tuần 2**
+### Các công việc cần triển khai trong tuần này:
 
-**1. Triển khai EC2 & mạng cốt lõi**
+| Thứ | Công việc                                                                                                                                                                                                                                                                                | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
+| :-- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------- | :-------------- | :---------------------------------------- |
+| 2   | - Đọc và hiểu các thành phần cốt lõi của **Amazon EC2** (AMI, Instance Type, Key Pair, Security Group). <br> - **Thực hành:** Khởi tạo Instance EC2 đầu tiên (chọn loại Free Tier).                                                                                                      | 15/09/2025   | 15/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Tìm hiểu về cơ chế cấp quyền an toàn **IAM Roles for EC2** (Instance Profiling). <br> - **Thực hành:** <br>&emsp; + Tạo IAM Policy cho phép `s3:ListBucket`. <br>&emsp; + Tạo IAM Role và gán Policy này. <br>&emsp; + Gán Role vừa tạo cho Instance EC2.                              | 16/09/2025   | 16/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Tìm hiểu các lệnh quản lý dịch vụ **EC2 với AWS CLI**. <br> - **Thực hành:** <br>&emsp; + Dùng CLI để xem thông tin EC2 Instance (`describe-instances`). <br>&emsp; + Dùng CLI để Stop/Start Instance. <br>&emsp; + Quản lý Security Group thông qua CLI.                              | 17/09/2025   | 17/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - **Thực hành Tích hợp:** Kiểm tra quyền hạn của IAM Role. <br> - Đăng nhập SSH/Session Manager vào Instance EC2. <br> - **Thực hành:** Dùng lệnh `aws s3 ls` (CLI) từ bên trong EC2 để kiểm tra xem Instance có thể đọc (list) các S3 Bucket hay không (chứng minh IAM Role hoạt động). | 18/09/2025   | 18/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Quản lý Vòng đời & Chi phí:** <br> - Ôn tập các trạng thái vòng đời của EC2 (Pending, Running, Stopping, Terminated). <br> - **Thực hành:** <br>&emsp; + **Terminate** (Chấm dứt) Instance EC2. <br>&emsp; + Xóa IAM Role, Policy đã tạo để dọn dẹp tài nguyên.                      | 19/09/2025   | 19/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
-- Triển khai Amazon EC2 instances và xác nhận kết nối.
-- Cấu hình NAT Gateway và sử dụng Reachability Analyzer để kiểm tra định tuyến.
-- Kích hoạt EC2 Instance Connect và Systems Manager Session Manager; thiết lập CloudWatch monitoring và cảnh báo.
+### Kết quả đạt được tuần 2:
 
-**2. Kết nối Site-to-Site VPN**
-
-- Thiết lập Virtual Private Gateway, Customer Gateway và kết nối VPN.
-- Chỉnh sửa tunnel VPN, thử nghiệm và thực hiện khắc phục sự cố khi cần.
-
-**3. Transit Gateway & StrongSwan VPN**
-
-- Thiết lập VPN bằng StrongSwan với Transit Gateway; tạo TGW và attachments.
-- Cấu hình route tables và Customer Gateway; xác minh routing giữa các VPC.
-
-**4. Route 53 & Microsoft AD**
-
-- Triển khai Microsoft AD và cấu hình Route 53: tạo inbound/outbound endpoints và resolver rules.
-- Kiểm tra phân giải DNS và xác nhận kết nối giữa các hệ thống.
-
-**5. VPC Peering & Thực hành**
-
-- Thiết lập VPC peering và cấu hình Cross-Peer DNS; xác minh mạng và DNS giữa các VPC.
-- Hoàn thành các bài thực hành: tạo EC2, kiểm tra kết nối, cấu hình Hybrid DNS và xác thực key pair.
+- **EC2:** Đã nắm được cách tạo, cấu hình và quản lý vòng đời của máy ảo EC2 thông qua Console và CLI. Hiểu rõ các thành phần cấu tạo nên một EC2 instance.
+- **IAM Roles:** Hiểu rõ ưu điểm và cách dùng **IAM Role** (Instance Profile) để cấp quyền truy cập dịch vụ AWS một cách bảo mật cho các tài nguyên EC2, loại bỏ việc lưu trữ Access Key trên máy chủ.
+- **AWS CLI Nâng Cao:** Đã biết cách sử dụng các lệnh CLI để quản lý trạng thái của EC2 Instance (Start, Stop, Describe) và thực hiện các thao tác từ xa.
+- **Thực hành Tích Hợp:** Đã chứng minh được việc EC2 Instance có thể thực thi các hành động trên S3 (ví dụ: `aws s3 ls`) nhờ vào quyền được cấp qua IAM Role, xác nhận mô hình bảo mật hoạt động hiệu quả.
+- **Dọn dẹp Tài nguyên:** Nắm được quy trình chấm dứt EC2 Instance và dọn dẹp các tài nguyên IAM liên quan để đảm bảo không phát sinh chi phí.

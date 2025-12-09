@@ -1,50 +1,64 @@
 ---
 title: "Worklog Tuần 1"
-date: "2025-09-09"
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
 
+### Mục tiêu tuần 1:
 
-### Mục Tiêu Tuần 1:
+- Kết nối, làm quen với các thành viên trong First Cloud Journey.
+- Hiểu dịch vụ AWS cơ bản, cách tạo và quản lý chi phi với tài khoản AWS.
+- Cách dùng console & CLI để tương tác và quản lý các dịch vụ.
 
-* Kết nối và làm quen với các thành viên của First Cloud Journey.
-* Hiểu về các dịch vụ AWS cơ bản, cách sử dụng console & CLI.
+### Các công việc cần triển khai trong tuần này:
 
-### Các nhiệm vụ được thực hiện trong tuần này:
-| Ngày | Nhiệm vụ                                                                                                                                                                                                   | Ngày Bắt Đầu | Ngày Hoàn Thành | Tài Liệu Tham Khảo                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 1   | - Gặp gỡ các thành viên và quản trị viên AWS <br> - Tham gia sự kiện AWS <br> - Tìm đồng đội và thành lập nhóm dự án   | 06/09/2025 | 06/09/2025| 
-| 2   | - Module 01: Tổng quan & bắt đầu với Cloud<br>&emsp; + Cloud Computing là gì? <br>&emsp; + Điều gì khiến AWS khác biệt? <br>&emsp; + Lộ trình bắt đầu hành trình Cloud <br>&emsp; + Hạ tầng toàn cầu của AWS <br>&emsp; + Công cụ quản lý dịch vụ AWS <br>&emsp; + Chiến lược tối ưu hóa chi phí và quy trình làm việc <br>&emsp; + Thực hành và tài liệu tham khảo thêm | 10/09/2025 | 10/09/2025 | <https://000001.awsstudygroup.com/> |
-| 3   | - Tạo tài khoản AWS mới <br> - Cấu hình MFA cho tài khoản <br> - Tạo nhóm Admin và tài khoản Admin <br> - Hỗ trợ xác thực tài khoản <br> - Khám phá và cấu hình AWS Management Console <br> - Tạo và quản lý Support Cases trên AWS | 11/09/2025 | 11/09/2025 | <https://000001.awsstudygroup.com/> |
-| 4   | - Tìm hiểu về AWS Budgets <br>&emsp; + Tạo ngân sách từ mẫu <br>&emsp; + Tạo ngân sách chi phí <br>&emsp; + Tạo ngân sách sử dụng <br>&emsp; + Tạo RI Budget <br>&emsp; + Tạo ngân sách Savings Plans <br>&emsp; + Dọn dẹp các ngân sách không sử dụng hoặc trùng lặp | 12/09/2025 | 12/09/2025 | <https://000007.awsstudygroup.com/> |
-| 5   | - Tìm hiểu về các gói hỗ trợ AWS <br> - Truy cập dịch vụ AWS Support <br>&emsp; + Các loại yêu cầu hỗ trợ <br>&emsp; + Cách thay đổi gói hỗ trợ <br> - Quản lý yêu cầu hỗ trợ <br>&emsp; + Tạo yêu cầu hỗ trợ <br>&emsp; + Chọn mức độ nghiêm trọng phù hợp | 13/09/2025 | 13/09/2025 | <https://000009.awsstudygroup.com/> |
-| 6   | - Module 02: AWS Virtual Private Cloud (VPC) <br> + Bảo mật VPC và tính năng Multi-VPC <br> + Tổng quan: VPN, Direct Connect, Load Balancer <br> - Bắt đầu với Amazon VPC và AWS Site-to-Site VPN <br> - Firewall trong VPC: Security Groups & Network ACLs <br>&emsp; + Sơ đồ tài nguyên VPC <br> - Các bước chuẩn bị: <br>&emsp; + Tạo VPC <br>&emsp; + Tạo Subnet <br>&emsp; + Tạo Internet Gateway <br>&emsp; + Tạo Route Table <br>&emsp; + Tạo Security Group <br>&emsp; + Kích hoạt VPC Flow Logs | 14/09/2025 | 14/09/2025 | <https://www.youtube.com/watch?v=O9Ac_vGHquM&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=25> <br> <https://www.youtube.com/watch?v=BPuD1l2hEQ4&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=26> <br> <https://www.youtube.com/watch?v=CXU8D3kyxIc&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=27> <br> <https://000003.awsstudygroup.com/> |
+| Thứ | Công việc                                                                                                                                                                                                                                                                                                                                                                               | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
+| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                                                                                                                                                                                                                         | 08/09/2025   | 08/09/2025      |
+| 3   | - Tìm hiểu AWS và các loại dịch vụ cơ bản <br>&emsp; + Compute (EC2) <br>&emsp; + Storage (S3) <br>&emsp; + Networking (VPC) <br>&emsp; + Database (RDS) <br>                                                                                                                                                                                                                           | 09/09/2025   | 09/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Quản lý danh tính và quyền <br>&emsp;&nbsp;&nbsp;&nbsp; truy cập <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Sử dụng AWS CLI với các thao tác cơ bản                                                                                            | 10/09/2025   | 10/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Tìm hiểu cách quản lý chi phí hiệu quả với AWS budget <br>&emsp; + Budget <br>&emsp; + Cost Budget, <br>&emsp; + Usage Budget <br>&emsp; + Reservation (RI) Budget <br>&emsp; + Saving plans Budget <br> - **Thực hành:** <br>&emsp; + Tạo Cost Budget <br>&emsp; + Tạo Usage Budget <br>&emsp; + Tạo RI Budget <br>&emsp; + Tạo Savings Plans Budget <br>&emsp; + Dọn Dẹp Tài Nguyên | 11/09/2025   | 11/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - Tìm hiểu về dịch vụ AWS Support <br> - Các gói hỗ trợ của AWS <br>&emsp; + Gói Basic, Developer, Business và Enterprise <br> - Các loại yêu cầu hỗ trợ <br>&emsp; + Hỗ trợ Tài khoản và Thanh toán <br>&emsp; + Hỗ trợ nâng hạn mức dịch vụ <br>&emsp; + Hỗ trợ Kỹ thuật <br> - **Thực hành:** <br>&emsp; + Chọn gói hỗ trợ Basic <br>&emsp; + Tạo yêu cầu hỗ trợ                     | 12/09/2025   | 12/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
-### 🏆 **Thành Tựu Tuần 1**
+### Kết quả đạt được tuần 1:
 
-**1. Kết Nối & Hợp Tác**
+- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
 
-- Gặp gỡ các thành viên và quản trị viên AWS; tham gia các buổi giới thiệu và thảo luận.
-- Tham gia sự kiện AWS, trao đổi kinh nghiệm và tham gia hoạt động nhóm.
-- Thành lập nhóm dự án, phân công vai trò ban đầu và lên kế hoạch làm việc.
+  - Compute: Cung cấp tài nguyên xử lý cho ứng dụng như máy ảo, container,...
+  - Storage: Dùng để lưu trữ dữ liệu, sao lưu và phục hồi
+  - Networking: Quản lý hạ tầng mạng, bảo mật, và kết nối giữa các tài nguyên AWS.
+  - Database: Cung cấp dịch vụ quản lý cơ sở dữ liệu quan hệ và phi quan hệ.
 
-**2. Module 01 – Kiến thức nền tảng AWS Cloud**
+- Đã tạo cấu hình và định danh AWS Free Tier account thành công.
+- Đã biết tạo và quản lý Group user, User.
+- Biết cách đăng nhập bằng IAM và các user trong cùng một group sẽ được dùng chung quyền được cấp.
 
-- Nắm vững các khái niệm cơ bản về Cloud Computing và hạ tầng toàn cầu của AWS.
-- Khám phá các công cụ quản lý dịch vụ AWS cùng các chiến lược tối ưu chi phí thực tế.
-- Tạo và cấu hình tài khoản AWS mới với MFA; thiết lập nhóm và tài khoản Admin.
-- Thực hành tạo, theo dõi và quản lý Support Case qua AWS Console.
+- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
 
-**3. AWS Budgets & Support**
+- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
 
-- Thiết lập và quản lý ngân sách (chi phí, sử dụng, RI, Savings Plans); kiểm tra cài đặt báo cáo.
-- Tìm hiểu các gói hỗ trợ AWS và quy trình gửi yêu cầu hỗ trợ.
-- Thực hành phân loại mức độ nghiêm trọng và quy trình nâng cấp khi cần.
+  - Access Key
+  - Secret Key
+  - Region mặc định
 
-**4. Module 02 – AWS VPC**
+- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
 
-- Triển khai các thành phần VPC: VPC, subnets, route tables và security groups.
-- Kích hoạt VPC Flow Logs để thu thập và kiểm tra dữ liệu lưu lượng mẫu.
-- Nghiên cứu VPN, Direct Connect, Load Balancer và các chính sách bảo mật (Security Groups, NACLs).
+  - Kiểm tra thông tin tài khoản & cấu hình
+  - Lấy danh sách region
+  - Tạo và xóa S3 Bucket
+  - Sử dụng SNS amazon
+  - Tạo IAM group, user và thêm user
+  - Tạo và xóa acess key
+  - Tạo và cấu hình cơ bản VPS
+  - Chạy và chấm dứt EC2
+
+- Nắm được cách quản lý và giám sát chi phí trên AWS thông qua các công cụ:
+  - Tạo và cấu hình các gói Budget (Cost, Usage, RI, Savings Plan).
+  - Biết cách dọn dẹp tài nguyên để quản lý chi phí hiệu quả.
+- Hiểu về các gói hỗ trợ của AWS và biết cách tạo yêu cầu hỗ trợ từ trung tâm hỗ trợ.
+  - Basic: Miễn phí, hỗ trợ các vấn đề liên quan đến tài khoản và thanh toán từ trung tâm trợ giúp
+  - Developer: 29 USD/tháng, tư vấn kiến trúc cơ bản, và hỗ trợ kỹ thuật không giới hạn được tạo từ tài khoản gốc (root user)
+  - Business:100 USD/tháng, lựa chọn phổ biến cho các doanh nghiệp vừa và nhỏ với các hỗ trợ như: Chỉ dẫn theo Use-case cụ thể, Hỗ trợ sử dụng AWS Support API, không giới hạn các yêu cầu hỗ trợ được tạo bởi tất cả các IAM User,...
+- Enterprise: 15.000 USD/tháng, cho doanh nghiệp quy mô lớn được đảm bảo các tiêu chí bảo mẩ tiêu chuẩn và nghiêm ngặt nhất với các dịch vụ bảo mật như: về kiến trúc phần mềm, hạ tầng, hỗ trợ toàn diện về chiến lược và tối ưu chi phí, được ưu tiên chăm sóc đặc biệt các yêu cấu hỗ trợ,...
+- Làm quen với giao diện AWS Console và sử dụng tốt các thao tác cơ bản qua cả Console và CLI.

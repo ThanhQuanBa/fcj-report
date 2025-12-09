@@ -1,46 +1,30 @@
 ---
-title: "Nhật ký Tuần 3"
-date: "2025-09-22"
+title: "Worklog Tuần 3"
 weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
 
-### Mục tiêu Tuần 3:
+### Mục tiêu tuần 3:
 
-* Thiết lập AWS Transit Gateway
-* Tạo Transit Gateway Attachments và Route Tables
-* Học các khái niệm và dịch vụ Amazon EC2 toàn diện
-* Nghiên cứu EC2 Auto Scaling, EFS/FSx, Lightsail, và MGN
+- Hiểu rõ vai trò và các thành phần cốt lõi của dịch vụ mạng ảo **Amazon Virtual Private Cloud (VPC)**.
+- Thành thạo việc tạo, cấu hình VPC, Subnet (Public/Private), Internet Gateway (IGW) và Route Table.
+- Nắm vững cơ chế bảo mật hai lớp: **Security Group (SG)** và **Network Access Control List (NACL)**.
+- Thực hành triển khai một EC2 Instance vào một VPC custom.
 
-### Nhiệm vụ thực hiện trong tuần:
-| Ngày | Nhiệm vụ | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
-| --- | ---- | ---------- | --------------- | ------------------ |
-| 1   | - Giới thiệu AWS Transit Gateway và tổng quan lab <br>&emsp;+ Hiểu các khái niệm về Transit Gateway <br>&emsp;+ So sánh VPC Peering và Transit Gateway <br>&emsp;+ Ôn lại lợi ích và các trường hợp sử dụng phổ biến <br>&emsp;+ Xem lại kiến trúc lab và yêu cầu tiên quyết | 22/09/2025 | 22/09/2025 | <https://000020.awsstudygroup.com/> |
-| 2   | - Tạo và cấu hình Transit Gateway <br>&emsp;+ Thiết lập tham số và cấu hình Transit Gateway <br>&emsp;+ Kiểm tra cấu hình Transit Gateway | 23/09/2025 | 23/09/2025 | <https://000020.awsstudygroup.com/>|
-| 3   | - Tạo attachments cho Transit Gateway và gắn VPC <br>&emsp;+ Cấu hình tham số attachment <br>&emsp;+ Xác minh trạng thái attachment và kết nối | 24/09/2025 | 24/09/2025 | <https://000020.awsstudygroup.com/>|
-| 4   | - Cấu hình route tables cho Transit Gateway và kiểm thử kết nối <br>&emsp;+ Tạo TGW route tables <br>&emsp;+ Thêm routes vào route tables của VPC <br>&emsp;+ Kiểm tra kết nối giữa các VPC <br>&emsp;+ Dọn dẹp tài nguyên kiểm thử | 25/09/2025 | 25/09/2025 | <https://000020.awsstudygroup.com/>|
-| 5   | - Module 03-01: Đi sâu Amazon EC2 <br>&emsp;+ Họ/loại instance và cách chọn kích thước <br>&emsp;+ AMI, chiến lược backup và quản lý key pair <br>&emsp;+ EBS vs Instance Store: snapshot và mã hóa <br>&emsp;+ User data và metadata <br>&emsp;+ Tổng quan EC2 Auto Scaling <br>&emsp;+ Tổng quan ngắn: EFS/FSx, Lightsail, MGN | 26/09/2025 | 26/09/2025 | |
+### Các công việc cần triển khai trong tuần này:
 
-### 🏆 **Thành tựu Tuần 3**
+| Thứ | Công việc                                                                                                                                                                                                                                                                                                                                       | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
+| :-- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------- | :-------------- | :---------------------------------------- |
+| 2   | - Đọc và hiểu kiến trúc của **VPC**: Khái niệm về IP, CIDR Block, Subnet, Availability Zone (AZ). <br> - **Thực hành:** Tạo một VPC mới với dải CIDR tùy chỉnh (ví dụ: `10.0.0.0/16`). <br> - Tạo hai Subnet: một Public và một Private.                                                                                                        | 22/09/2025   | 22/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Tìm hiểu về **Internet Gateway (IGW)**, **Route Table** và vai trò của chúng trong việc cấp truy cập Internet. <br> - **Thực hành:** <br>&emsp; + Tạo và đính kèm IGW vào VPC. <br>&emsp; + Cấu hình **Route Table Public** để định tuyến traffic ra IGW. <br>&emsp; + Liên kết Route Table Public với Public Subnet.                         | 23/09/2025   | 23/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Tìm hiểu về cơ chế bảo mật **Security Group (SG)** (Stateful) và nguyên tắc hoạt động. <br> - **Thực hành:** <br>&emsp; + Khởi tạo một EC2 Instance trong Public Subnet. <br>&emsp; + Cấu hình SG chỉ cho phép SSH/RDP (Port 22/3389) từ IP cá nhân. <br>&emsp; + Thử truy cập để kiểm tra tính năng bảo mật của SG.                          | 24/09/2025   | 24/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Tìm hiểu về cơ chế bảo mật **Network Access Control List (NACL)** (Stateless). <br> - **Thực hành:** <br>&emsp; + Cấu hình NACL cho Public Subnet (thử nghiệm tạo rule Deny). <br>&emsp; + Phân biệt chi tiết sự khác nhau khi xử lý inbound/outbound giữa SG và NACL. <br>&emsp; + Tìm hiểu khái niệm về NAT Gateway (trong Private Subnet). | 25/09/2025   | 25/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Dọn dẹp & Ôn tập tổng quát:** <br> - **Thực hành:** <br>&emsp; + Chấm dứt (Terminate) EC2 Instance. <br>&emsp; + **Xóa toàn bộ các thành phần VPC** đã tạo theo đúng thứ tự (Detach IGW -> Xóa Subnets -> Xóa Route Tables -> Xóa VPC) để dọn dẹp chi phí. <br>&emsp; + Tổng kết các thành phần VPC đã học.                                 | 26/09/2025   | 26/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
-**1. Khái niệm & Thiết kế Transit Gateway**
+### Kết quả đạt được tuần 3:
 
-- Nắm vững các khái niệm chính của Transit Gateway và ôn lại kiến trúc lab.
-- So sánh Transit Gateway và VPC Peering, thảo luận các trường hợp sử dụng và điểm khác biệt.
-
-**2. Transit Gateway Attachments**
-
-- Tạo attachments cho Transit Gateway và gắn các VPC tương ứng.
-- Xác minh trạng thái attachment và kiểm tra kết nối VPC-to-TGW.
-
-**3. Route Tables & Kiểm thử**
-
-- Tạo route tables cho Transit Gateway và thêm routes vào route tables của VPC.
-- Thực hiện kiểm tra kết nối giữa các VPC và dọn dẹp tài nguyên kiểm thử.
-
-**4. Kiến thức nền tảng Amazon EC2**
-
-- Ôn lại họ/loại instance EC2 và các tiêu chí chọn kích thước.
-- Tìm hiểu AMI, chiến lược backup, quản lý key pair, EBS vs Instance Store, snapshot và mã hoá.
-- Xem xét user data/metadata và giới thiệu về EC2 Auto Scaling.
+- **VPC Cấu hình:** Đã hiểu và tự tay tạo được VPC, Subnet (Public/Private), Internet Gateway, và Route Table để định tuyến lưu lượng truy cập.
+- **Bảo mật Lớp Mạng:** Nắm vững và phân biệt được cơ chế bảo mật hai lớp: **Security Group** (Stateful, hoạt động ở cấp Instance) và **NACL** (Stateless, hoạt động ở cấp Subnet).
+- **Triển khai Cơ bản:** Đã triển khai thành công EC2 Instance trong VPC tự tạo và xác nhận khả năng truy cập Internet.
+- **Kỹ năng Dọn dẹp:** Thực hiện thành công việc dọn dẹp các tài nguyên mạng theo đúng thứ tự (đảm bảo không để lại tài nguyên không cần thiết), góp phần quản lý chi phí hiệu quả.

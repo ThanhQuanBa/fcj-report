@@ -1,50 +1,71 @@
 ---
 title: "Week 1 Worklog"
-date: "2025-09-09"
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
 
-
 ### Week 1 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+- Connect and get acquainted with members of the First Cloud Journey team.
+- Understand basic AWS services and how to create and manage costs with an AWS account.
+- Use AWS Console & CLI to interact with and manage services.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 1   | - Met with AWS members and administrators <br> - Attended an AWS event <br> - Located teammates and formed a project group                                                                                        | 06/09/2025 | 06/09/2025      | 
-| 2   | - Module 01: Overview & getting started with Cloud <br>&emsp; + What is Cloud Computing? <br>&emsp; + What makes AWS unique? <br>&emsp; + How to begin your Cloud journey <br>&emsp; + AWS global infrastructure <br>&emsp; + Tools for managing AWS services <br>&emsp; + Cost optimization strategies and working patterns <br>&emsp; + Hands-on practice and further reading | 10/09/2025 | 10/09/2025 | <https://000001.awsstudygroup.com/> |
-| 3   | - Create a new AWS account <br> - Configure MFA for accounts <br> - Create Admin group and Admin user accounts <br> - Provide account authentication support <br> - Explore and configure the AWS Management Console <br> - Create and manage AWS Support cases | 11/09/2025 | 11/09/2025 | <https://000001.awsstudygroup.com/> |
-| 4   | - Learn about AWS Budgets <br>&emsp; + Create budgets from templates <br>&emsp; + Create cost budgets <br>&emsp; + Create usage budgets <br>&emsp; + Create RI budgets <br>&emsp; + Create Savings Plans budgets <br>&emsp; + Clean up unused or redundant budgets | 12/09/2025 | 12/09/2025 | <https://000007.awsstudygroup.com/> |
-| 5   | - Learn about AWS Support plans <br> - Access AWS Support services <br>&emsp; + Types of support requests <br>&emsp; + How to change support plans <br> - Manage support requests <br>&emsp; + Create support requests <br>&emsp; + Choose appropriate severity levels | 13/09/2025 | 13/09/2025 | <https://000009.awsstudygroup.com/> |
-| 6   | - Module 02: AWS Virtual Private Cloud (VPC) <br> + VPC security and multi-VPC features <br> + Overview: VPN, Direct Connect, Load Balancers <br> - Start with Amazon VPC and AWS Site-to-Site VPN <br> - Firewalls in VPC: Security Groups & Network ACLs <br>&emsp; + VPC resource mapping <br> - Preparation steps: <br>&emsp; + Create VPC <br>&emsp; + Create subnets <br>&emsp; + Create Internet Gateway <br>&emsp; + Create route tables <br>&emsp; + Create security groups <br>&emsp; + Enable VPC Flow Logs | 14/09/2025 | 14/09/2025 | <https://www.youtube.com/watch?v=O9Ac_vGHquM&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=25> <br> <https://www.youtube.com/watch?v=BPuD1l2hEQ4&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=26> <br> <https://www.youtube.com/watch?v=CXU8D3kyxIc&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=27> <br> <https://000003.awsstudygroup.com/> |
+### Tasks to be completed this week:
 
-### 🏆 **Week 1 Achievements**
+| Day | Task                                                                                                                                                                                                                                                                                                                                                         | Start Date | Completion Date | Reference Materials                       |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
+| 2   | - Get to know FCJ members <br> - Read and note the rules and regulations of the internship unit                                                                                                                                                                                                                                                              | 08/09/2025 | 08/09/2025      |
+| 3   | - Learn about AWS and basic service types <br>&emsp; + Compute (EC2) <br>&emsp; + Storage (S3) <br>&emsp; + Networking (VPC) <br>&emsp; + Database (RDS)                                                                                                                                                                                                     | 09/09/2025 | 09/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Create AWS Free Tier account <br> - Learn AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Identity & Access Management <br>&emsp; + Install & configure AWS CLI <br>&emsp; + Use AWS CLI for basic operations                                                                                                      | 10/09/2025 | 10/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Learn cost management with AWS Budget <br>&emsp; + Cost Budget <br>&emsp; + Usage Budget <br>&emsp; + Reservation (RI) Budget <br>&emsp; + Savings Plans Budget <br> - **Practice:** <br>&emsp; + Create Cost Budget <br>&emsp; + Create Usage Budget <br>&emsp; + Create RI Budget <br>&emsp; + Create Savings Plans Budget <br>&emsp; + Resource Cleanup | 11/09/2025 | 11/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - Learn AWS Support service <br> - Support plan types: <br>&emsp; + Basic, Developer, Business, Enterprise <br> - Types of support requests: <br>&emsp; + Account & Billing <br>&emsp; + Service Limit Increase <br>&emsp; + Technical Support <br> - **Practice:** <br>&emsp; + Select Basic plan <br>&emsp; + Create support case                          | 12/09/2025 | 12/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
-**1. Networking & Collaboration**
+### Week 1 Achievements:
 
-- Met AWS members and administrators; took part in introductory sessions.
-- Attended an AWS event and participated in group activities.
-- Formed a project team and began coordinating roles.
+- Understood what AWS is and learned core service categories:
 
-**2. Module 01 – AWS Cloud Fundamentals**
+  - **Compute:** Provides processing resources like virtual machines and containers.
+  - **Storage:** Used for storing, backing up, and recovering data.
+  - **Networking:** Manages network infrastructure, security, and connectivity.
+  - **Database:** Provides managed relational and NoSQL database services.
 
-- Covered fundamental concepts of Cloud Computing and AWS global infrastructure.
-- Explored AWS management tools and practical cost-optimization techniques.
-- Created and configured a new AWS account with MFA; set up Admin group and user.
-- Practiced opening and managing Support Cases via the AWS Console.
+- Successfully created and configured an AWS Free Tier account.
+- Learned how to create and manage IAM Groups and Users.
+- Understood IAM login and shared permissions for users in the same group.
 
-**3. AWS Budgets & Support**
+- Became familiar with AWS Management Console and how to search, access, and use services.
 
-- Created budgets (cost, usage, RI, Savings Plans) and reviewed reporting settings.
-- Reviewed AWS Support packages and the workflow for creating support requests.
-- Practiced selecting severity levels and managing case escalations.
+- Installed and configured AWS CLI, including:
 
-**4. Module 02 – AWS VPC**
+  - Access Key
+  - Secret Key
+  - Default Region
 
-- Deployed VPC resources: VPC, subnets, route tables and security groups.
-- Enabled VPC Flow Logs and checked sample traffic logs.
-- Studied VPN, Direct Connect, Load Balancers and network security (Security Groups, NACLs).
+- Used the AWS CLI for basic tasks:
+
+  - Check account & config info
+  - List regions
+  - Create/delete S3 Buckets
+  - Use Amazon SNS
+  - Create IAM groups and users
+  - Create/delete access keys
+  - Create basic VPS configuration
+  - Launch and terminate EC2 instances
+
+- Learned how to manage and monitor AWS costs using:
+
+  - Cost Budget
+  - Usage Budget
+  - RI Budget
+  - Savings Plans Budget
+  - Resource cleanup to avoid unnecessary cost
+
+- Understood AWS Support plans and how to create support cases:
+
+  - **Basic:** Free, account & billing support via documentation.
+  - **Developer:** $29/month, basic architectural guidance, unlimited technical support (root user).
+  - **Business:** $100/month, common for SMBs; use-case guidance, AWS Support API, unlimited IAM user support cases.
+  - **Enterprise:** $15,000/month, advanced security, architecture support, strategic guidance, priority case handling.
+
+- Became comfortable using AWS Console and CLI for basic cloud operations.

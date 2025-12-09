@@ -1,195 +1,737 @@
 ---
 title: "Blog 2"
-date: "2025-07-10"
 weight: 2
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
-# Democratize data for timely decisions with text-to-SQL at Parcel Perform
 
-by Yudho Ahmad Diponegoro, Le Vy, and Jun Kai Loke | on July 09, 2025 | in [Amazon Athena](https://aws.amazon.com/athena/), [Amazon Bedrock](https://aws.amazon.com/bedrock/), [Amazon Bedrock Knowledge Bases](https://aws.amazon.com/bedrock/knowledge-bases/), [Business Intelligence](https://aws.amazon.com/business-intelligence/), [Customer Solutions](https://aws.amazon.com/solutions/), [Generative AI](https://aws.amazon.com/generative-ai/), [Intermediate (200)](https://aws.amazon.com/training/), [Supply Chain](https://aws.amazon.com/supply-chain/)
+# **How ​​to Accelerate Security Search Assessments Using Automated Business Context Validation in AWS Security Hub CSPM**
 
-*This post is co-written with Le Vy from Parcel Perform.*
----
-Access to accurate data is often the true differentiator between excellent decisions and timely decisions. This becomes even more critical for customer-facing decisions and actions. A modern AI deployed correctly can help your organization simplify data access to make accurate and timely decisions for customer-facing business teams, while minimizing the undifferentiated heavy lifting that your data team has to do. In this post, we share how [Parcel Perform](https://www.parcelperform.com/), a leading AI Delivery Experience platform for global ecommerce businesses, has implemented such a solution.
+by Reetesh Surjani and Satish Kamat on SEPTEMBER 22, 2025 in **[Advanced (300)](https://aws.amazon.com/blogs/security/category/learning-levels/advanced-300/) , [AWS Security Hub](https://aws.amazon.com/blogs/security/category/security-identity-compliance/aws-security-hub/) , [Security, Identity, and Compliance](https://aws.amazon.com/blogs/security/category/security-identity-compliance/) , [Technical Guide](https://aws.amazon.com/blogs/security/category/security-identity-compliance/) , [Technical Guide](https://aws.amazon.com/blogs/security/category/security-identity-compliance/) technical](https://aws.amazon.com/blogs/security/category/post-types/technical-how-to/) [Permalink](https://aws.amazon.com/blogs/security/how-to-accelerate-security-finding-reviews-using-automated-business-context-validation-in-aws-security-hub/) [Commentary] review](https://aws.amazon.com/blogs/security/how-to-accelerate-security-finding-reviews-using-automated-business-context-validation-in-aws-security-hub/#Comments) [Share share](https://aws.amazon.com/vi/blogs/security/how-to-accelerate-security-finding-reviews-using-automated-business-context-validation-in-aws-security-hub/#)**
 
-Accurate post-purchase deliveries tracking can be crucial for many ecommerce merchants. Parcel Perform provides an AI-driven, intelligent end-to-end data and delivery experience and software as a service (SaaS) system for ecommerce merchants. The system uses AWS services and state-of-the-art AI to process hundreds of millions of daily parcel delivery movement data and provide a unified tracking capability across couriers for the merchants, with emphasis on accuracy and simplicity.
-
-The business team in Parcel Perform often needs access to data to answer questions related to merchants’ parcel deliveries, such as “Did we see a spike in delivery delays last week? If so, in which transit facilities were this observed, and what was the primary cause of the issue?” Previously, the data team had to manually form the query and run it to fetch the data. With the new generative AI-powered text-to-SQL capability in Parcel Perform, the business team can self-serve their data needs by using an AI assistant interface. In this post, we discuss how Parcel Perform incorporated generative AI, data storage, and data access through AWS services to make timely decisions. 
+**October 1, 2025:** This post has been updated to reflect the new name of Security Hub, AWS Security Hub CSPM (Cloud Security Posture Management).
 
 ---
 
-## Data analytics architecture
+Security teams must effectively validate and document exceptions to [**AWS Security Hub (Cloud Security Posture Management, formerly known as Security Hub) findings**](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-control-manage-findings.html)**,** and maintain appropriate governance. Enterprise security teams need to ensure that exceptions to security best practices are properly validated and documented, while development teams need a streamlined process for implementing and verifying compensating controls.
 
-The solution starts with data ingestion, storage, and access. Parcel Perform adopts a data analytics architecture as shown in the following diagram.
+In this blog post, we present an automated solution that is ideal for organizations using [**AWS Security Hub CSPM**](https://aws.amazon.com/security-hub/) that need to manage security exceptions at scale while maintaining administrative controls. This solution is especially useful for enterprises with complex compliance requirements and multiple development teams. By implementing this solution, you can accelerate the review of Security Hub CSPM findings while maintaining appropriate security governance and providing clear business context for security exceptions.
 
-![Data Analytics Architecture](/images/3-Blog/ML-18476-data-architecture.png)
+**Note:** The solution in this article is provided as a reference architecture and should not be deployed as-is in a production environment. Organizations should carefully review, customize, and enhance this solution to align with their specific security requirements, compliance frameworks, governance policies, and risk tolerances. Please work with your security, compliance, and legal teams before implementing this automated security validation solution.
 
-One key data type in the Parcel Perform parcel monitoring application is the parcel event data, which can reach billions of rows. This includes the parcel’s shipment status change, location change, and much more. This day-to-day data from multiple business units lands in relational databases hosted on  [Amazon Relational Database Service](https://aws.amazon.com/rds/) (Amazon RDS).
+## **Challenge**
 
-Although relational databases are suitable for rapid data ingestion and consumption from the application, a separate analytics stack is needed to handle analytics in a scalable and performant way without disrupting the main application. These analytics needs include answering aggregation queries from questions like “How many parcels were delayed last week?”
+Security Hub CSPM provides **[a comprehensive view of your AWS security posture across AWS accounts](https://docs.aws.amazon.com/securityhub/latest/userguide/dashboard.html) .** However, in real-world scenarios, you will encounter valid business reasons that lead to exceptions to security best practices. For example:
 
-Parcel Perform uses [Amazon Simple Storage Service](https://aws.amazon.com/s3/) (Amazon S3) with a query engine provided by [Amazon Athena](https://aws.amazon.com/athena/) to meet their analytics needs. With this approach, Parcel Perform benefits from cost-effective storage while still being able to run SQL queries as needed on the data through Athena, which is priced on usage.
+- Not enabling Amazon GuardDuty: Because of an alternative monitoring solution, an organization postponed implementing [Amazon GuardDuty](https://aws.amazon.com/guardduty/) but required compensating controls such as **[Amazon Virtual Private Cloud (VPC) flow logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html), [Amazon CloudWatch alerts](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)**, and an organization-specific incident response process.
 
-Data in Amazon S3 is stored in [Apache Iceberg](https://iceberg.apache.org/) data format that allows data updates, which is useful in this case because the parcel events sometimes get updated. It also supports partitioning for better performance [Amazon S3 Tables](https://aws.amazon.com/s3/features/tables/), launched in late 2024, is a feature for managing Iceberg tables, and could also be an option for you.
+- Do not enable public access to Amazon S3: Marketing teams may need a public **[Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/s3/)** bucket for website assets, but should implement the following offsetting controls:
 
-Parcel Perform uses an [Apache Kafka](https://kafka.apache.org/) cluster managed by [Amazon Managed Streaming for Apache Kafka](https://aws.amazon.com/msk/) (Amazon MSK) as a stream to transfer data from source to S3 bucket. [Amazon MSK Connect](https://aws.amazon.com/msk/features/msk-connect/) with Debezium connector streams data using change data capture (CDC) from Amazon RDS to Amazon MSK.
+- [**Amazon CloudFront Distribution**](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-working-with.html) **before [Amazon S3](https://aws.amazon.com/s3/)**
 
-[Apache Flink](https://flink.apache.org/), running on [Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/) (Amazon EKS), processes the data streams from Amazon MSK. It writes this data to the S3 bucket in Iceberg format, and updates the data schema in [AWS Glue Data Catalog](https://docs.aws.amazon.com/glue/latest/dg/catalog-and-crawler.html). This data schema allows Athena to query the correct data in the S3 bucket.
+- Server-side encryption with **[AWS KMS (SSE-KMS) keys enabled](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)** on the S3 bucket
 
-Now that you understand how data is ingested and stored, we'll look at how data is consumed through a data serving assistant using generative AI for business teams at Parcel Perform.
+- Enable **[Amazon bucket logging S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html)**
+
+- Enable [**Amazon S3 bucket versioning**](https://docs.aws.amazon.com/AmazonS3/latest/userguide/manage-versioning-examples.html)
+
+- [**Amazon CloudWatch alarms**](https://aws.amazon.com/cloudwatch) for suspicious access patterns and comprehensive access logging
+
+Managing exceptions to security best practices can be difficult and often involves multiple steps. Security teamsIt takes a lot of time to review exception requests, identify and validate compensating controls, and then developers must implement and validate those controls. Multiple teams must be mobilized to create and manage documentation for compliance and audit purposes. In general, if done manually, this process is time-consuming, error-prone (with the risk of missing implementation issues), and has the risk of poor visibility due to limited or missing documentation of the business context of security findings.
+
+## **Solution Prerequisites**
+
+To resolve this issue, you must have the following:
+
+- **AWS account with appropriate service quotas for [Amazon DynamoDB](https://aws.amazon.com/dynamodb), [AWS Lambda](https://aws.amazon.com/lambda), and [Amazon Simple Queue Service (Amazon SQS)](https://aws.amazon.com/sqs)**
+
+- **[AWS Identity and Access Management (IAM)](https://aws.amazon.com/iam) permissions required to deploy various AWS resources including:**
+
+- **IAM create-role and IAM put-role-policy permissions (to create security group roles and developer roles)**
+
+- [**AWS Stack Management CloudFormation**](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudformation-stack.html)
+
+- **Create and manage [DynamoDB tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html)**
+
+- [**Amazon SQS**](https://aws.amazon.com/sqs/)
+
+- [**Mapping AWS Lambda event sources with Amazon SQS**](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html)
+
+- [**Amazon Policy SQS**](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-using-identity-based-policies.html)
+
+- **Deploy and configure [Lambda functions](https://aws.amazon.com/lambda/)**
+
+- [**Lambda execution roles**](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html)
+
+- **Configure [Amazon EventBridge rules](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html)**
+
+- [**Amazon S3 bucket operations**](https://aws.amazon.com/s3/) **for deployment artifacts**
+
+- [**AWS Command Line Interface (AWS CLI)**](https://aws.amazon.com/cli/) **version 2.17.44 or later**
+
+- [**Python**](https://www.python.org/downloads/release/python-3120/) **version 3.12 or later**
+
+- [**JSON jq Processing Utility**](https://jqlang.org/download/) **for scripting operations**
+
+- [**Security Hub CSPM**](https://aws.amazon.com/security-hub/) **enabled in your target AWS Region**
+
+**aws securityhub enable-security-hub**
+
+- [**AWS Config**](https://aws.amazon.com/config/) **recommended for enhanced authentication**
+
+**aws configservice put\-configuration\-recorder \\ \--configuration\-recorder name\=default,roleARN\=arn:aws:iam::ACCOUNT_ID:role/aws\-service\-role/config.amazonaws.com/AWSServiceRoleForConfig**
+
+### **Automatic Validation**
+
+The solution includes a pre-deployment validation script **( [validate-environment.sh](https://github.com/aws-samples/sample-automated-securityhub-validator/blob/main/scripts/validate-environment.sh) )** that automatically verifies the following:
+
+- Tool version and installation
+
+- AWS service activation status
+
+- Resource conflicts
+
+This validation runs automatically during deployment (Integrated in the [deploy.sh](https://github.com/aws-samples/sample-automated-securityhub-validator/blob/main/scripts/deploy.sh) ) to help ensure that required prerequisites are met before starting to create the infrastructure.
+
+### **Additional Resources**
+
+See the **[Cost Estimation Guide](https://github.com/aws-samples/sample-automated-securityhub-validator/blob/main/docs/guides/cost-estimation.md)** for a detailed pricing table for prerequisites and the [**Troubleshooting Guide**](https://github.com/aws-samples/sample-automated-securityhub-validator/blob/main/docs/guides/troubleshooting.md) for common setup issues and solutions.
+
+## **Solution Overview**
+
+This solution provides sample code and CloudFormation templates that organizations can deploy to automatically validate compensating controls for masked Security Hub CSPM findings while maintaining appropriate segregation of duties between security and development teams.
+
+### **Architecture**
+
+**![Figure 1: Solution Architecture Diagram]![alt text](https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/image-1-23.png)**
+
+**_Figure 1: Solution Architecture Diagram_**
+
+Figure 1 illustrates the solution process initiated when a developer changes the process status of a Security Hub CSPM result to **SUPPRESSED**, requesting a business-appropriate security exception. The process ends with the solution adding the validation result as a note to the corresponding Security Hub CSPM result, and maintaining a complete audit log of the exception request and validation result.
+
+**Note _:_** Before initiating this workflow, developers must consult with the security team within the organization to explain the business rationale for this exception. DuringDuring this initial consultation, the security team determines the required compensating controls for the detection type. The security team uses the **add-controls-role-based.sh** script to add controls to DynamoDB. The developer activates the required compensating controls before changing the workflow state.
+
+The workflow shown in Figure 1 consists of the following steps:
+
+1. The developer changes the Security Hub CSPM search state to **SUPPRESSED.**
+
+2. EventBridge detects the change to **SUPPRESSED.**
+
+3. The EventBridge rule sends the event to an Amazon SQS queue.
+
+4. The Lambda function retrieves messages from the Amazon SQS queue.
+
+5. The Lambda function retrieves the compensating controls from the DynamoDB compensating dashboard.
+
+6. The Lambda function validates each control using the appropriate AWS service API.
+
+7. Evidence is collected for each validation and stored in DynamoDB.
+
+8. The detection validation result and timestamp are stored in the DynamoDB table **Findings.**
+
+9. The version history of validation attempts is stored in the **History** table DynamoDB.
+
+10. If the controls provided by the security team pass validation, the search result remains **SUPPRESSED,** and a note is added to the corresponding Security Hub search result with the adjusted severity information (the original severity assigned by Security Hub is not changed by this solution). If one of these controls fails **validation, the search status will be changed to NOTIFIED, and a note will be added to the Security Hub search results for the failed controls (the initial severity level assigned by the Security Hub CSPM is not changed by this solution).**
+
+11. OPTIONAL: Extend the solution with [**Amazon OpenSearch**](https://aws.amazon.com/opensearch-service/) for SOC teams to perform advanced searching, correlation, and visualization of validation evidence on findings, as well as historical trend analysis of compensating control effectiveness. Use **[Amazon QuickSight](https://aws.amazon.com/quicksight/)** to visualize compliance metrics and **[AWS Security Lake](http://aws.amazon.com/security-lake/)** to centralize authentication data across multiple accounts and regions, normalize data in the OCSF format for comprehensive cross-account analysis, and long-term compliance reporting.
+
+**Note:** This solution must be deployed in accordance with your organization's security policy and the [**AWS Shared Responsibility Model**](https://aws.amazon.com/compliance/shared-responsibility-model/)**.** Please review and test security controls before deploying in production.
+
+### **How ​​it works**
+
+This solution is designed specifically for deployment and management by an organization's security teams. Only security groups have permission to deploy **[AWS CloudFormation](https://aws.amazon.com/cloudformation) stacks,** modify Lambda authentication code, add/modify offset controls, or access the four DynamoDB tables (Controls, Detections, History, Evidence).
+
+Developers are limited to two specific actions: suppress Security Hub CSPM detections and read offset control requests. This strict separation of roles facilitates proper governance and helps prevent bypassing security authentication logic. Organizations must implement appropriate IAM policies to enforce these access restrictions in production environments.
+
+The solution works as follows:
+
+1. Security groups define controls: Security groups set up offset controls for specific Security Hub detection types and store them in a DynamoDB table. This helps ensure approved exceptions adhere to approved security guidelines and maintain compliance standards.
+
+- Important files for security teams:
+
+| Documentation                         | Purpose                                     |
+| :------------------------------------ | :------------------------------------------ |
+| add-controls-role-based.sh            | Utility script to add compensating controls |
+| /templates/findings/\*.json           | Compensating control example for reference  |
+| /docs/guides/compensating-controls.md | Guide to defining controls                  |
+
+- Supported authentication types: The solution supports 13 authentication methods to meet diverse security requirements:
+
+| Authentication type      | Description                                       | Usage example                                                                                                                                   |
+| ------------------------ | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **CONFIG_RULE**          | Authenticate using **AWS Config Rules**           | For **GuardDuty not enabled**, find: `vpc-flow-logs-enabled` — rule to ensure network traffic is monitored                                      |
+| **API_CALL**             | Authenticate using direct **AWS API calls**       | Check public access of **Amazon S3**: API call verifies **CloudFront distribution** exists before **S3 bucket**                                 |
+| **SECURITY_HUB_CONTROL** | Authenticate using **Security Hub Control** state | For **GuardDuty not enabled**, find: `CloudTrail.1` — ensure comprehensive API logging                                                          |
+| **CLOUDWATCH**           | Authenticate using **CloudWatch alarms**          | For **GuardDuty not enabled**, create **alarm** to monitor suspicious API calls and unusual network traffic                                     |
+| **CLOUDTRAIL**           | Validate **AWS CloudTrail** configuration         | With **GuardDuty not enabled**, ensure **multi-region CloudTrail** has log validation and **CloudWatch** integration                            |
+| **SYSTEMS_MANAGER**      | Validate with **AWS Systems Manager Parameters**  | With **GuardDuty not enabled**, check the **custom threat detection solution** assertion parameter is enabled                                   |
+| **PROCESS_CONTROL**      | Validate **processes**-based controls             | With **GuardDuty not enabled**, verify the **incident response process** is logged for network security events                                  |
+| **INSPECTOR**            | Validate **Amazon Inspector** configuration       | Vulnerability check: **Inspector EC2 scans** are enabled and no critical issues are detected                                                    |
+| **ACCESS_ANALYZER**      | Validate **AWS IAM Access Analyzer**              | Ensure **Access Analyzer** is enabled and no **active findings** are allowed                                                                    |
+| **MACIE**                | Validate **Amazon Macie** configuration           | Ensure **Macie** is enabled, detects sensitive data, and no sensitive data groups are left out                                                  |
+| **AUDIT_MANAGER**        | Validate **AWS Audit Manager frameworks**         | Ensure **custom security framework** is active and includes all **mandatory controls**                                                          |
+| **EVENTBRIDGE**          | Validate **Amazon EventBridge** rules             | With **GuardDuty not enabled**, validate **EventBridge rule** monitors **AWS CloudTrail** events with **Lambda targets** for automated response |
+| **TRUSTED_ADVISOR**      | Validate **AWS Trusted Advisor** checks           | Check **S3 bucket permissions** — must pass without **warnings** or **errors**                                                                  |
+
+Note: Only security group members have permission to add or modify offset controls. The solution enforces this permission through IAM permissions and runtime checks to maintain proper governance.
+Approved security exceptions must have an expiration date to facilitate periodic review. The solution automatically applies these time limits based on the expiration date defined by the security team.
+In this article, we provide a utility script ( [add-controls-role-based.sh](https://github.com/aws-samples/sample-automated-securityhub-validator/blob/main/scripts/add-controls-role-based.sh) ) to demonstrate adding offset controls. However, in production enterprise environments, organizations should integrate DynamoDB with existing governance systems (such as Jira, ServiceNow, etc.) to automatically populate controls from sources authorized by the security team. This solution focuses on validating controls, not prescribing how they are received.
+
+2\. Developers deploy controls: When a Security Hub CSPM is detected as suppressed, the developer must deploy the required compensating controls defined by the security team.
+
+How developers interact with the solution:
+
+1. View required controls: The solution provides clear requirements for each search type.
+
+2. Deploy compensating controls: Developers should deploy the compensating controls provided by the security team in their AWS environment, referencing the compensating controls defined by the security team. The specific compensating controls depend on the type of detection and the security team's requirements.
+
+3. Look for status changes: The developer changes the Security Hub CSPM search status to **SUPPRESSED** in Security Hub.
+
+4. Automated Validation: Solution to validate compensation controls when CSPM Security workflow statusHub changes.
+
+5. Status update: The result remains **SUPPRESSED** if the control passes validation; the result changes to **NOTIFIED** with error details if validation fails.
+
+Note: This solution does not modify the original severity of the findings in Security Hub CSPM. It adds business context with security-approved severity to the findings based on security-approved compensating control validation, helping security teams make informed decisions.
+
+With this solution, we simulate the developer workflow of handling CSPM findings on Security Hub by deploying and validating compensating controls. In production, developers will receive notifications of findings that require attention, deploy the necessary controls as directed by the security team, and use this validation system to verify the deployment. The solution focuses on the validation aspect but assumes that organizations will integrate it with existing developer workflows, ticket systems, and continuous integration and delivery (CI/CD) processes to create a seamless process from bug discovery to remediation verification.
+**Evidence Collection and Audit Tracking**
+The solution automatically collects comprehensive evidence for each validation activity. Key features of the solution include:
+
+1. Four-table design: Separate tables for Controls, Findings, History, and Evidence (shown in Figure 2\) provide security through separation while maintaining a full audit trail
+
+**![Figure 2: Four-table design to store offsetting controls, evidence, findings, and history]![alt text](https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/image-2-20.png)**
+**_Figure 2: Four-table design to store offsetting controls, evidence, findings, and history_**
+
+1. Detailed evidence: Each validation stores specific evidence based on its type—from AWS Config rule compliance details to API responses and process document verification
+
+2. Immutable records: Each evidence includes a timestamp, validation context, and results that cannot be modified after collection (shown in Figure 3)![]![alt text](https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/image-3-17.png)
+   **\*Figure 3: Sample collected evidence to validate CONFIG_RULE shows PASSED status\*\*\***History Tracking: The solution maintains a full history of each validation, allowing organizations to demonstrate ongoing compliance over time\*\*
+
+3. History Tracking: The solution maintains a full history of each validation, allowing organizations to demonstrate ongoing compliance over time
+
+**Deployment and Configuration**
+You can deploy the solution using the provided scripts.
+
+1. Use the following command to clone the repository:
+
+**git clone [https://github.com/aws-samples/sample-automated-securityhub-validator.git](https://github.com/aws-samples/sample-automated-securityhub-validator.git)**
+
+**cd automated-securityhub-validator**
+
+2. Use the following command to check service quotas and create security groups and developer roles:
+
+**cd scripts**
+
+**./create-roles-quotas-check.sh**
+
+3. Use the following command to assume the security group roles:
+
+**aws sts assume\-role \--role\-arn arn:aws:iam:: ACCOUNT_ID:role/securityhub\-validator\-SecurityTeamRole \--role\-session\-name SecurityTeamSession**
+
+In the output of the previous command, Note the AccessKeyId, SecretAccessKey, and SessionToken markers. The timestamp in the Expires field is in UTC and shows when the IAM role's temporary credentials expire. After the temporary credentials expire, the user must resume assuming the role.
+
+Note: For temporary credentials, you can use the DurationSeconds parameter to increase the maximum session duration for IAM roles.
+
+4. Create environment variables to assume the security group role and verify the user has assumed the IAM role:
+
+- Run the following commands to set the environment variables to assume the IAM role:
+
+**export AWS_ACCESS_KEY_ID\=RoleAccessKeyID**
+
+**export AWS_SECRET_ACCESS_KEY\=RoleSecretKey**
+
+**export AWS_SESSION_TOKEN\=RoleSessionToken**
+
+Note: Replace the example values ​​with the values ​​you noted when assuming the IAM role. For Windows (OS), replace export with set.
+
+- Run the get-caller-identitycommand to verify that the user has assumed the IAM role:
+
+**aws sts get-caller-identity**
+**Note:** In the output of the previous command, confirm that the ARN is **arn:aws:sts::ACCOUNT_ID:assumed-role/securityhub-validator-SecurityTeamRole/SecurityTeamSession** instead of **arn:aws:iam::ACCOUNT_ID:user/username.**
+
+5. Use the following command to deploy the solution:
+
+**cd scripts**
+
+**./deploy.sh**
+
+6. You can verify that the stack has been created by going to the AWS Management Console for CloudFormation and following these steps:
+
+7. In the CloudFormation console, select Stacks and then select Stack details in the navigation pane.
+
+8. Locate and select the securityhub-validator stack to open its details page.tack that.
+
+9. On the stack details page, select the Resources tab.
+
+10. Under Resources, you'll see a list of resources that are part of the stack.
+
+**![Image 4: Resources created using a CloudFormation stack]![alt text](https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/image-4-14.png)**
+**_Image 4: Resources created using a CloudFormation stack_**
+**The deployment script creates a CloudFormation stack with the required resources:**
+
+- DynamoDB table for controls, detections, history, and evidence
+
+- A Lambda function to authenticate and update Security Hub
+
+- EventBridge rule to record search state changes
+
+- Amazon SQS queue and dead letter queue (DLQ) to process messages
+
+- Least privilege IAM role
+
+7\. Add compensating controls (security group):
+
+**cd scripts**
+
+**./add-controls-role-based.sh**
+
+8\. Implement controls (developer).
+
+The developer will now assume the developer role and deploy the required controls based on the security group specifications. The solution will automatically validate these deployments when the **SUPPRESSED** developer changes the Security Hub CSPM workflow status.
+
+For an example of how to implement common controls, see **[example of compensating controls for GuardDuty.1 detection](https://github.com/aws-samples/sample-automated-securityhub-validator/blob/main/templates/findings/example-guardduty-1.json).**
+
+**Test the solution**
+
+To test the solution, you can validate the compensating controls for GuardDuty detection using the following example scenario:
+A developer wants a security exception for Security Hub CSPM when GuardDuty.1 is found: [**GuardDuty must be enabled**](https://docs.aws.amazon.com/securityhub/latest/userguide/guardduty-controls.html#guardduty-1) and due to cost constraints, the developer's organization has not deployed GuardDuty and has asked their organization's security team to issue a security exception.
+The compensating controls provided by the security group include:
+
+- [**Amazon Virtual Private Cloud (Amazon VPC) Flow Logs**](https://aws.amazon.com/vpc) must be enabled for network monitoring
+
+- CloudWatch alarms triggered to monitor for suspicious activity
+
+**Note:** To simulate this finding, do not enable GuardDuty so that the _GuardDuty enabled_ finding appears in the Security Hub console.
+
+Approximately 20–30 minutes after enabling AWS Config and Security Hub CSPM, you can locate this finding in the console by performing the following steps, then adding the compensating controls provided by the security group.
+
+For this use case, we are using _GuardDuty to enable_ Security Hub CSPM:
+
+1. Navigate to the AWS Security Hub CSPM console and select Findings in the navigation pane.
+
+2. In the Add Filter search bar at the top, select the Severity label and set the value to HIGH .
+
+3. After applying the filter, select GuardDuty to enable in the Search column to view its details in the right pane.
+
+4. Select Actions in the upper right corner and select View JSON .![]![alt text](https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/image-5-13.png)
+
+**_Figure 5: Security Hub CSPM Detection_**
+
+5. In the JSON details window, find the SecurityControlId field and note the value. You will be prompted to enter this value **add-controls-role-based.sh utility in the next step.**
+
+**Note: SecurityControlIdThis value is required for the add-controls-role-based.sh utility to correctly associate your offset control with the Security Hub CSPM detection.**
+
+**![Image 6: SecurityControlId from GuardDuty detection]![alt text](https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/image-6-9.png)**
+
+**_Image 6: SecurityControlId from GuardDuty detection_**
+
+1. Use the following command to clone the repository:
+
+**git clone [https://github.com/aws-samples/sample-automated-securityhub-validator.git](https://github.com/aws-samples/sample-automated-securityhub-validator.git)**
+
+**cd sample-automated-securityhub-validator**
+
+7. For this demo, you will be a member of the security group by assuming the security group role and using the add-controls-role-based.sh utility to create offset controls and push them to the DynamoDB offset controls table.
+
+**cd sample-automated-securityhub-validator/scripts**
+
+**./add-controls-role-based.sh**
+
+8. Use the following prompt values ​​add-controls-role-based.sh to create compensating control table entries using the four compensating controls provided by the security team to GuardDuty.1search type:
+
+**./add\-controls\-role\-based.sh**
+
+**Security Team \- Compensating Controls Management Utility**
+
+**\-----------------------------------------------------------**
+
+**SECURITY NOTICE: This utility is restricted to security team members only**
+
+**Validating security team role...**
+
+**✓ Security team role validated: arn:aws:sts::xxxxxxxxxxx:assumed\-role/securityhub\-validator\-SecurityTeamRole/SecurityTeamSession**
+
+**Using AWS Region: us\-east\-1**
+
+**Using stack: securityhub\-validator**
+
+**Using controls table: securityhub\-validator\-ControlsTable\-ARDQCU67CBCN**
+
+**Enter finding type (e.g., GuardDuty.1): GuardDuty.1**
+
+**Security approved adjusted risk level \[CRITICAL/HIGH/MEDIUM/LOW/INFORMATIONAL\]: MEDIUM**
+
+**Expiration date (YYYY\-MM\-DD): 2026\-12\-31**
+
+**Ticket reference: JIRA\-SEC\-1234**
+
+**Business justification: Alternative monitoring solution provides equivalent detection capabilities**
+
+**Adding Control \#1**
+
+**Control ID: VPC\-FLOW\-LOGS**
+
+**Control description: VPC Flow logs must be enabled for network monitoring**
+
+**Validation type \[CONFIG_RULE/API_CALL/SECURITY_HUB_CONTROL/INSPECTOR/ACCESS_ANALYZER/CLOUDTRAIL/MACIE/AUDIT_MANAGER/CLOUDWATCH/SYSTEMS_MANAGER/EVENTBRIDGE/TRUSTED_ADVISOR/PROCESS_CONTROL\]: CONFIG_RULE**
+
+**Config rule name (exact name): vpc\-flow\-logs\-enabled**
+
+**Description of how this rule mitigates the finding: Provides comprehensive network traffic visibility similar to GuardDuty's network monitoring capabilities**
+
+**Add another control? \[y/n\]: y**
+
+**Adding Control \#2**
+
+**Control ID: SECURITY\-ALARMS**
+
+**Control description: CloudWatch alarms for suspicious activity**
+
+**Validation type \[CONFIG_RULE/API_CALL/SECURITY_HUB_CONTROL/INSPECTOR/ACCESS_ANALYZER/CLOUDTRAIL/MACIE/AUDIT_MANAGER/CLOUDWATCH/SYSTEMS_MANAGER/EVENTBRIDGE/TRUSTED_ADVISOR/PROCESS_CONTROL\]: CLOUDWATCH**
+
+**Alarm name pattern: SecurityMonitoring\-**
+
+**Required metrics (comma\-separated): UnauthorizedAPICalls,NetworkPortProbing**
+
+**Required alarm state \[ALARM/OK/INSUFFICIENT_DATA/ANY\]: ANY**
+
+**Minimum number of matching alarms required: 2**
+
+**Description of how these alarms mitigate the finding: Alarms detect suspicious API calls and network activity similar to GuardDuty's threat detection**
+
+**Add another control? \[y/n\]: n**
+
+**Generated controls:**
+
+**{**
+
+**"findingType": {**
+
+**"S": "GuardDuty.1"**
+
+**},**
+
+**"securityApprovedAdjustedRiskLevel": {**
+
+**"S": "MEDIUM"**
+
+**},**
+
+**"expirationDate": {**
+
+**"S": "2026-12-31T00:00:00Z"**
+
+**},**
+
+**"ticketReference": {**
+
+**"S": "JIRA-SEC-1234"**
+
+**},**
+
+**"businessJustification": {**
+
+**"S": "Alternative monitoring solution provides equivalent detection capabilities"**
+
+**},**
+
+**"auditInfo": {**
+
+**"S": "{\\"createdBy\":\"arn:aws:sts::xxxxxxxxxxx:assumed-role/securityhub-validator-SecurityTeamRole/SecurityTeamSession\",\"createdAt\":\"2025-08-05T08:49:51Z\",\"la stModifiedBy\":\"arn:aws:sts::xxxxxxxxxxx:assumed-role/securityhub-validator-SecurityTeamRole/SecurityTeamSession\",\"lastModifiedAt\":\\"2025-08-05T08:49:51Z\\"}"**
+
+**},**
+
+**"securityControlHash": {**
+
+**"S": "a0b33a0a96a6b282bad1c093586d89cef832d40bb379abd4a004d00afdf603d1"**
+
+**},**
+
+**"requiredControls": {**
+
+**"S": "\[{\\"controlId\":\"VPC-FLOW-LOGS\",\"description\":\"VPC Flow logs must be enabled for network monitoring\",\"validationType\":\"CONFIG_RULE\",\"validationParams\":{\\"ruleName\":\"vpc-flow-logs-enabled\",\"justification\":\"Provides comprehensive network traffic visibility similar to GuardDuty's network monitoring capabilities\"}},{\\"controlId\":\"SECURITY-ALARMS\",\"description\":\"CloudWatch alarms for suspicious activity\",\"validationType\":\"CLOUDWATCH\",\"validationParams\":{\\"alarmNamePattern\":\"SecurityMonitoring-\",\"requiredMetrics \\":\[\"UnauthorizedAPICalls\",\"NetworkPortProbing\"\],\"requiredState\":\"ANY\",\"minimumAlarms\":2,\"justification\":\"Alarms detect suspicious API calls and network activity similar to GuardDuty's threat detection\"}}\]"**
+
+**}**
+
+**}**
+
+**Save to DynamoDB? \[y/n\]: y**
+
+**Compensating controls saved to DynamoDB\!**
+
+**This action has been logged for audit purposes.**
+
+9. When prompted to save to DynamoDB, enter Y. The compensating controls will be added to the DynamoDB compensation dashboard.
+
+**![Image 7: Compensating Control for GuardDuty Detection.1]![alt text](https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/image-7-8.png)**
+**_Image 7: Compensating Control for GuardDuty Detection.1_**
+
+1.  For this proof-of-concept demo, deploying compensating controls requires additional AWS permissions beyond what the developer role provides. In production environments, these controls are typically deployed by infrastructure teams or through automated deployment processes.
+
+- Move to admin info.
+
+To illustrate, let's temporarily switch back to your AWS administrative credentials (the ones used to create the role):
+
+Uninstall security group role credentials
+**unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN**
+
+- Implement necessary controls
+
+Control 1: Enable VPC Flow Logs, starting by getting your VPC ID **VPC_ID=$(aws ec2 describe-vpcs \--query 'Vpcs\[0\].VpcId' \--output text)**
+Create flow logs:
+
+**aws ec2 create\-flow\-logs \\**
+
+**\--resource\-type VPC \\**
+
+**\--resource\-ids $VPC_ID \\**
+
+**\--traffic\-type ALL \\**
+
+**\--log\-destination\-type cloud\-watch\-logs \\**
+
+**\--log\-group\-name VPCFlowLogs**Create an AWS Config Rule:
+
+**aws configservice put\-config\-rule \\**
+
+**\--config\-rule '{**
+
+**"ConfigRuleName": "vpc-flow-logs-enabled",**
+
+**"Source": {**
+
+**"Owner": "AWS",**
+
+**"SourceIdentifier": "VPC_FLOW_LOGS_ENABLED"**
+
+**}**
+
+**}'**
+
+Control 2: Creating security monitoring alerts starts with creating a metric filter for CloudTrail Logs; Start by creating a log group for CloudTrail (if none exists): **aws logs create-log-group \--log-group-name CloudTrail/SecurityEvents** Create a metric filter for unauthorized API calls:
+
+**aws logs put\-metric\-filter \\**
+
+**\--log\-group\-name CloudTrail/SecurityEvents \\**
+
+**\--filter\-name UnauthorizedAPICallsFilter \\**
+
+**\--filter\-pattern '{ ($.errorCode \= "\*UnauthorizedOperation") || ($.errorCode \= "AccessDenied\*") }' \\**
+
+**\--metric\-transformations metricName\=UnauthorizedAPICalls,metricNamespace\=SecurityMetrics,metricValue\=1**
+
+Create a filter to probe network ports:
+
+**aws logs put-metric-filter \\**
+
+**\--log-group-name CloudTrail/SecurityEvents \\**
+
+**\--filter-name NetworkPortProbingFilter \\**
+
+**\--filter-pattern '\[version, account, eni, source, destination, srcport, destport="22" || destport="3389" || destport="1433", protocol, packets, bytes, windowstart, windowend, action="REJECT", flowlogstatus\]' \\**
+
+**\--metric-transformations metricName=NetworkPortProbing,metricNamespace\=SecurityMetrics,metricValue\=1**
+
+Create required CloudWatch alerts, starting with Alert 1 for unauthorized API calls:
+
+**aws cloudwatch put\-metric\-alarm \\**
+
+**\--alarm\-name "SecurityMonitoring-UnauthorizedAPICalls" \\**
+
+**\--alarm\-description "Detects unauthorized API calls" \\**
+
+**\--metric\-name "UnauthorizedAPICalls" \\**
+
+**\--namespace "SecurityMetrics" \\**
+
+**\--statistic Sum \\**
+
+**\--period 300 \\**
+
+**\--threshold 1 \\**
+
+**\--comparison\-operator GreaterThanOrEqualToThreshold \\**
+
+**\--evaluation\-periods 1**
+
+Alarm 2: Network port probe:
+
+**aws cloudwatch put\-metric\-alarm \\**
+
+**\--alarm\-name "SecurityMonitoring-NetworkPortProbing" \\**
+
+**\--alarm\-description "Detects network port probing activity" \\**
+
+**\--metric\-name "NetworkPortProbing" \\**
+
+**\--namespace "SecurityMetrics" \\**
+
+**\--statistic Sum \\**
+
+**\--period 300 \\**
+
+**\--threshold 5 \\**
+
+**\--comparison\-operator GreaterThanOrEqualToThreshold \\**
+
+**\--evaluation\-periods 1**
+
+11. Now assume a DeveloperRole to prevent detection:
+
+**aws sts assume\-role \\**
+
+**\--role\-arn arn:aws:iam::ACCOUNT_ID:role/securityhub\-validator\-DeveloperRole \\**
+
+**\--role\-session\-name DeveloperSession**
+
+**Configure the credentials returned:**
+
+**export AWS_ACCESS_KEY_ID\=\<from assume\-role output\>**
+
+**export AWS_SECRET_ACCESS_KEY\=\<from assume\-role output\>**
+
+**export AWS_SESSION_TOKEN\=\<from assume\-role output\>**
+
+12. Change the GuardDuty-related Security Hub workflow status from NEW to SUPPRESSED.
+
+To change workflow status using AWS CLI (developer):
+
+**\# Get the finding ARN first (command shown for reference)**
+
+**aws securityhub get-findings \\**
+
+**\--filters '{"GeneratorId":\[{"Value":"security-control/GuardDuty.1","Comparison":"EQUALS"}\]}' \\**
+
+**\--query 'Findings\[0\].Id'**
+
+**\# Get the product ARN (command shown for reference)**
+
+**aws securityhub get-findings \\**
+
+**\--filters '{"GeneratorId":\[{"Value":"security-control/GuardDuty.1","Comparison":"EQUALS"}\]}' \\**
+
+**\--query 'Findings\[0\].ProductArn' \\**
+
+**\--output text**
+
+**\# Then suppress the finding**
+
+**aws securityhub batch-update-findings \\**
+
+**\--finding-identifiers '\[{"Id":"finding-arn-from-above","ProductArn":"product-arn-from-above"}\]' \\**
+
+**\--workflow '{"Status":"SUPPRESSED"}' \\**
+
+**\--note '{"Text":"Implemented compensating controls as per security team requirements","UpdatedBy":"developer@example.com"}'**
+
+To change the workflow status using the (developer) console:
+
+1. Access the Security Hub CSPM console.
+
+2. In the navigation pane, select Detections.
+
+3. In the search bar, select the Compliance Security Control ID filter and enter the Is value as **GuardDuty.1.**
+
+4. Select the GuardDuty item to be enabled and in Workflow Status, select DISABLED.
+
+5. In the Notes field, enter **Implemented compensating controls as per security team requirements.**
+
+6. Select Set Status to save the note.
+
+**![Image 8: GuardDuty.1 search workflow status changed from NEW to PREVENTED]![alt text](https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/image-8-8.png)**
+
+**_Image 8: GuardDuty.1 search workflow status changed from NEW to PREVENTED_**
+**Note:** Only delete findings after implementing the required compensating controls provided by the security team.
+
+13\. After the workflow status of the discoveryn is **SUPPRESSED,** the automatic validation process will start and you can view Lambda function logs in the CloudWatch console related to the different validations performed.
+
+To view Lambda function logs in the CloudWatch console:
+
+1. Go to the Amazon CloudWatch console.
+
+2. In the navigation pane, under Logs, select Log Groups.
+
+3. Select the log group with the Lambda function name.
+
+4. Select the most recent log stream to view the logs.
+
+**![Image 9: Lambda Function CloudWatch Logs]![alt text](https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/image-9-7.png)**
+**_Image 9: Lambda Function CloudWatch Logs_**
+
+The solution updates the findings notes in Security Hub CSPM with the validation results:
+
+If all controls pass:
+
+- Still looking for **SUPPRESSED.**
+
+- A note is added with the validation results and adjusted risk level.
+
+- Business context is added to the search results.
+
+If one of the controls fails:
+
+- Search for a status change for **NOTIFIED.**
+
+- A note is added with details about the failed controls.
+
+- The security team will review these changes as part of their standard process.
+
+**To view the workflow status of the discovery and updated notes using the (developer) console:**
+
+1. Go to the Security Hub CSPM console.
+
+2. In the navigation pane, select Findings.
+
+3. In the search bar, select the Compliance Security Control ID filter and enter the value Is as **GuardDuty.1.**
+
+4. Select the GuardDuty item that needs to be enabled and check the Workflow status.
+
+5. For Action, select Add Note.
+
+6. Check the Last Note Added.
+
+**![Image 10: Security Hub CSPM Updated Search Notes]![alt text](https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/image-10-4.png)**
+**_Image 10: Security Hub CSPM Updated Search Notes_**
+
+The discovery notes show that automated validation performed the test and recorded the results, and note that the original severity level **HIGH** assigned by Security Hub CSPM is maintained, and the adjusted severity level **MEDIUM** provided by the security team is added to the Notes section and Evidence panel, providing transparency and accountability while maintaining the original severity level assigned by Security Hub CSPM**.**
+**Cleanup**
+To avoid ongoing costs, use the following command to clean up resources created for this post.
+**./cleanup.sh**
+This deployment process is designed to be simple and maintains security best practices such as encryption, least privilege, and segregation of duties.
+
+**Conclusion**
+In this article, we showed you how to implement a solution that security teams can use to define compensating controls for AWS Security Hub CSPM findings and automatically validate their implementation. We analyzed the challenges of managing security exceptions and demonstrated how the solution helps bridge the gap between security requirements and actual implementation.
+The solution provides a structured workflow where security teams define appropriate compensating controls, developers implement them, and an automated system validates their effectiveness. With support for 13 different types of validation, from AWS Config rules to process documentation, the solution provides comprehensive security coverage for a variety of security scenarios.
+We also demonstrated a comprehensive process for adding compensating controls to GuardDuty detections and showed that the solution maintains the severity of the original detection assigned by the Security Hub CSPM, while recording an adjusted risk level approved by the security team. This approach helps maintain transparency and auditability, while allowing for necessary exceptions.
+Try it out and share your feedback in the comments.
+Security Disclaimer: The Amazon S3 configurations presented in this article involve publicly accessible setups that expose data to the internet and should only be used for demonstration purposes or non-sensitive content. Public S3 buckets pose significant risks, including data leaks, unexpected costs from unauthorized use, regulatory violations, and potential security vulnerabilities. For production environments, use IAM roles, implement a least privilege access policy, enable S3 Block Public Access settings, and consider using CloudFront with Origin Access Control to deliver public content. Please consult your security team and ensure compliance with organizational policies before deploying public S3 configurations in production.
 
 ---
 
-## Data-queryable AI agent
-
-The users of the data serving AI agent at Parcel Perform are customer-facing business team members who regularly query parcel event data to answer questions from ecommerce merchants about deliveries and support them proactively. The following screenshot shows the AI assistant UI experience, powered by text-to-SQL with generative AI.
-
-![AI Assistant UI](/images/3-Blog/ML-18476-ai-assistant-screenshot.png)
-
-This functionality helped the Parcel Perform team and their customers save time, which we discuss later in this post. In the following section, we present the architecture that powers this feature.
-
----
-
-## Text-to-SQL AI agent architecture
-
-The data serving AI assistant architecture in Parcel Perform is shown in the following diagram.
-
-![Text-to-SQL Architecture](/images/3-Blog/ML-18476-ai-assistant-architecture.png)
-
-The AI assistant UI is supported by an application built with the [FastAPI](https://fastapi.tiangolo.com/) framework hosted on Amazon EKS. It is also fronted by an [Application Load Balancer](https://aws.amazon.com/elasticloadbalancing/application-load-balancer/) to allow for potential horizontal scalability.
-
-The application uses [LangGraph](https://www.langchain.com/langgraph) to orchestrate the workflow of large language model (LLM) calls, tool usage, and memory checkpointing. The graph uses multiple tools, including tools from the [SQLDatabase Toolkit](https://python.langchain.com/docs/integrations/tools/sql_database/) to automatically retrieve data schema through Athena. The graph also uses an [Amazon Bedrock Knowledge Bases retriever](https://python.langchain.com/docs/integrations/retrievers/bedrock/) to retrieve business information from a knowledge base. Parcel Perform uses [Anthropic's Claude models in Amazon Bedrock](https://aws.amazon.com/bedrock/claude/) to generate SQL.
-
-Although the function of Athena as a query engine to query the parcel event data on Amazon S3 is clear, Parcel Perform still needs a knowledge base. In this use case, the SQL generation performs better when the LLM has more business contextual information to help interpret database fields and translate logistics terminology into data representations. This is better illustrated with the following two examples:
-
-1. Parcel Perform’s data lake operations use specific codes `c` for create and `u` for update. When analyzing data, Parcel Perform sometimes needs to focus only on initial creation records, where operation code is equal to `c`. Because this business logic might not be inherent in the training of LLMs in general, Parcel Perform explicitly defines this in their business context.
-
-2. In logistics terminology, transit time has specific industry conventions. It’s measured in days, and same-day deliveries are recorded as `transit_time = 0`. Although this is intuitive for logistics professionals, an LLM might incorrectly interpret a request like “Get me all shipments with same-day delivery” by using`WHERE transit_time = 1` instead of `WHERE transit_time = 0` in the generated SQL.
-
-Therefore, each incoming question goes to a Retrieval Augmented Generation (RAG) workflow to find potentially relevant stored business information, to enrich the context. This mechanism helps provide the specific rules and interpretations that even advanced LLMs might not be able to derive from general training data.
-
-Parcel Perform uses [Amazon Bedrock Knowledge Bases](https://aws.amazon.com/bedrock/knowledge-bases/) as a managed solution for the RAG workflow. They ingest business context information by uploading files to Amazon S3. Amazon Bedrock Knowledge Bases processes the files, chunks them, uses embedding models to create vectors, and stores the vectors in a vector database so they can be searched. These steps are fully managed by Amazon Bedrock Knowledge Bases. Parcel Perform stores the vectors in [Amazon OpenSearch Serverless](https://aws.amazon.com/opensearch-service/features/serverless/) as the chosen vector database to simplify infrastructure management.
-
-Amazon Bedrock Knowledge Bases provides the [Retrieve API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html), which takes in an input (such as a question from the AI assistant), converts it into a vector embedding, searches for relevant chunks of business context information in the vector database, and returns the top relevant document chunks. It is integrated with the [LangChain](https://www.langchain.com/) Amazon Bedrock Knowledge Bases retriever by [calling the invoke method](https://python.langchain.com/api_reference/aws/retrievers/langchain_aws.retrievers.bedrock.AmazonKnowledgeBasesRetriever.html#langchain_aws.retrievers.bedrock.AmazonKnowledgeBasesRetriever.invoke).
-
-The next step involves invoking an AI agent with the supplied business contextual information and the SQL generation prompt. The prompt was inspired by [a prompt in LangChain Hub](https://smith.langchain.com/hub/langchain-ai/sql-agent-system-prompt). The following is a code snippet of the prompt:
-
-```
-You are an agent designed to interact with a SQL database.
-Given an input question, create a syntactically correct {dialect} query to run, then look at the results of the query and return the answer.
-Unless the user specifies a specific number of examples they wish to obtain, always limit your query to at most {top_k} results.
-
-Relevant context:
-{rag_context}
-
-You can order the results by a relevant column to return the most interesting examples in the database.
-Never query for all the columns from a specific table, only ask for the relevant columns given the question.
-You have access to tools for interacting with the database.
-- Only use the below tools. Only use the information returned by the below tools to construct your final answer.
-- DO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the database.
-- To start querying for final answer you should ALWAYS look at the tables in the database to see what you can query. Do NOT skip this step.
-- Then you should query the schema of the most relevant tables
-```
-
-The prompt sample is part of the initial instruction for the agent. The data schema is automatically inserted by the tools from the SQLDatabase Toolkit at a later step of this agentic workflow. The following steps occur after a user enters a question in the AI assistant UI:
-
-1. The question triggers a LangGraph execution run.
-
-2. The following processes happen in parallel:
- a. The graph fetches the database schema from Athena through SQLDatabase Toolkit.
- b. The graph passes the question to the Amazon Bedrock Knowledge Bases retriever and gets a list of relevant business information regarding the question.
-
-3. The graph invokes an LLM using Amazon Bedrock by passing the question, the conversation context, data schema, and business context information. The result is the generated SQL.
-
-4. The graph uses the SQLDatabase Toolkit again to run the SQL through Athena and receive data results.
-
-5. The data output is passed into an LLM to generate the final response based on the initial question asked. [Amazon Bedrock Guardrails](https://aws.amazon.com/bedrock/guardrails/) is used as a safeguard to avoid inappropriate inputs and responses.
-
-6. The final response is returned to the user through the AI assistant UI.
-
-The following diagram illustrates these steps.
-
-![Workflow Steps](/images/3-Blog/ML-18476-ai-assistant-architecture-numbered.png)
-
-This implementation demonstrates how Parcel Perform transforms raw inquiries into actionable data for timely decision-making. Security is also implemented in multiple components. From a network perspective, the EKS pods are placed in private subnets in [Amazon Virtual Private Cloud](http://aws.amazon.com/vpc) (Amazon VPC)  to improve network security of the AI assistant application. This AI agent is placed behind a backend layer that requires authentication. For data security, sensitive data is masked at rest in the S3 bucket. Parcel Perform also limits the permissions of the [AWS Identity and Access Management](https://aws.amazon.com/iam/) (IAM) role used to access the S3 bucket so it can only access certain tables.
-
-In the following sections, we discuss how Parcel Perform approached building this data transformation solution.
-
----
-
-## From idea to production
-
-Parcel Perform started with the idea of freeing their data team from manually serving the request from the business team, while also improving the timeliness of the data availability to support the business team’s decision-making.
-
-With the help of the AWS Solutions Architect team, Parcel Perform completed a proof of concept using AWS services and a [Jupyter notebook](https://jupyter.org/) in [Amazon SageMaker Studio](https://aws.amazon.com/sagemaker-ai/studio/). After an initial success, Parcel Perform integrated the solution with their orchestration tool of choice, LangGraph.
-
-Before going into production, Parcel Perform conducted thorough testing to verify result consistency. They added [LangSmith Tracing](https://docs.smith.langchain.com/observability) to record the steps and results of the AI agent to evaluate its performance.
-
-The Parcel Perform team discovered challenges during their journey, which we discuss in the following section. They performed prompt engineering to address those challenges. Eventually, the AI agent was integrated into production to be used by the business team. Afterward, Parcel Perform collected user feedback internally and monitored logs from LangSmith Tracing to verify performance was maintained.
-
----
-
-## Challenges
-
-This journey was not immune to challenges.
-
-This journey isn’t free from challenges. Firstly, some ecommerce merchants might have several records in the data lake under various names. For example, a merchant with the name “ABC” might have multiple records such, as “ABC Singapore Holdings Pte. Ltd.,” “ABC Demo Account,” “ABC Test Group,” and so on. For a question like “Was there any parcel shipment delay by ABC last week?”, the generated SQL has the element of `WHERE merchant_name LIKE '%ABC%'` which might result in ambiguity. During the proof of concept stage, this problem caused incorrect matching of the result.
-
-For this challenge, Parcel Perform relies on careful prompt engineering to instruct the LLM to identify when the name was potentially ambiguous. The AI agent then calls Athena again to look for matching names. The LLM decides which merchant name to use based on multiple factors, including the significance in data volume contribution and the account status in the data lake. In the future, Parcel Perform intends to implement a more sophisticated technique by prompting the user to resolve the ambiguity.
-
-The second challenge is about unrestricted questions that might yield expensive queries running across large amounts of data and resulting in longer query waiting time. Some of these questions might not have a LIMIT clause imposed in the query. To solve this, Parcel Perform instructs the LLM to add a LIMIT clause with a certain number of maximum results if the user doesn’t specify the intended number of results. In the future, Parcel Perform plans to use the query EXPLAIN results to identify heavy queries.
-
-The third challenge is related to tracking usage and incurred cost of this particular solution. Having started multiple generative AI projects using Amazon Bedrock and sometimes with the same LLM ID, Parcel Perform must distinguish usage incurred by projects. Parcel Perform creates an [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles.html) for each project, associates the profile with [tags](https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/what-are-tags.html), and includes that profile in each LLM call for that project. With this setup, Parcel Perform is able to segregate costs based on projects to improve cost visibility and monitoring.
-
----
-
-## The impact
-To extract data, the business team clarifies details with the data team, makes a request, checks feasibility, and waits for bandwidth. This process lengthens when requirements come from customers or teams in different time zones, with each clarification adding 12–24 hours due to asynchronous communication. Simpler requests made early in the workday might complete within 24 hours, whereas more complex requests or those during busy periods can take 3–5 business days.
-
-With the text-to-SQL AI agent, this process is dramatically streamlined—minimizing the back-and-forth communication for requirement clarification, removing the dependency on data team bandwidth, and automating result interpretation.
-
-Parcel Perform’s measurements show that the text-to-SQL AI agent reduces the average time-to-insight by 99%, from 2.3 days to an average of 10 minutes, saving approximately 3,850 total hours of wait time per month across requesters while maintaining data accuracy.
-
-Users can directly query the data without intermediaries, receiving results in minutes rather than days. Teams across time zones can now access insights any time of day, alleviating the frustrating “wait until Asia wakes up” or “catch EMEA before they leave” delays, leading to happier customers and faster problem-solving.
-
-This transformation has profoundly impacted the data analytics team’s capacity and focus, freeing the data team for more strategic work and helping everyone make faster, more informed decisions. Before, the analysts spent approximately 25% of their working hours handling routine data extraction requests—equivalent to over 260 hours monthly across the team. Now, with basic and intermediate queries automated, this number has dropped to just 10%, freeing up nearly 160 hours each month for high-impact work. Analysts now focus on complex data analysis rather than spending time on basic data retrieval tasks.
-
----
-
-## Conclusion
-Parcel Perform’s solution demonstrates how you can use generative AI to enhance productivity and customer experience. Parcel Perform has built a text-to-SQL AI agent that transforms a business team’s question into SQL that can fetch the actual data. This improves the timeliness of data availability for decision-making that involves customers. Furthermore, the data team can avoid the undifferentiated heavy lifting to focus on complex data analysis tasks.
-
-This solution uses multiple AWS services like Amazon Bedrock and tools like LangGraph. You can start with a proof of concept and consult your AWS Solutions Architect or engage with [AWS Partners](https://partners.amazonaws.com/). If you have questions, post them on [AWS re:Post](https://repost.aws/). You can also make the development more straightforward with the help of [Amazon Q Developer](https://aws.amazon.com/q/developer/). When you face challenges, you can iterate to find the solution, which might include prompt engineering or adding additional steps to your workflow.
-
-Security is a top priority. Make sure your AI assistant has proper guardrails in place to protect against prompt threats, inappropriate topics, profanity, leaked data, and other security issues. You can integrate Amazon Bedrock Guardrails with your generative AI application through an API.To learn more, refer to the following resources:
-
-- Build a robust text-to-SQL solution generating complex queries, self-correcting, and querying diverse data sources
-- [Xây dựng giải pháp chuyển đổi văn bản sang SQL mạnh mẽ, tạo ra các truy vấn phức tạp, tự động sửa lỗi và truy vấn các nguồn dữ liệu đa dạng](https://aws.amazon.com/blogs/machine-learning/build-a-robust-text-to-sql-solution-generating-complex-queries-self-correcting-and-querying-diverse-data-sources/)
-- [LangGraph agents with Amazon Bedrock workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/9bc28f51-d7c3-468b-ba41-72667f3273f1/en-US)
-- [Build a knowledge base by connecting to a structured data store](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html)
-
----
-
-## About the authors
-
-<div style="display: flex; align-items: flex-start; margin-bottom: 30px;">
-  <img src="/images/3-Blog/yudho-full2.jpg" alt="Yudho Ahmad Diponegoro" style="width: 150px; height: 150px; object-fit: cover; margin-right: 20px; border-radius: 8px;">
-  <div>
-    <p><strong>Yudho Ahmad Diponegoro</strong> is a Senior Solutions Architect at AWS. Having been part of Amazon for 10+ years, he has had various roles from software development to solutions architecture. He helps startups in Singapore when it comes to architecting in the cloud. While he keeps his breadth of knowledge across technologies and industries, he focuses in AI and machine learning where he has been guiding various startups in ASEAN to adopt machine learning and generative AI at AWS.</p>
-  </div>
+<div style="display: flex; gap: 20px; padding: 20px; border: 1px solid #e5e7eb; border-radius: 6px; margin-bottom: 24px;">
+    <img src="https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/Reetesh-Surjani-author.jpg" 
+         width="130" 
+         style="border-radius: 4px;">
+    <div>
+        <h3>Reetesh Surjani</h3>
+        <p>
+            Reetesh is a Delivery Consultant in Security Risk & Compliance at AWS Professional Services,
+            based in Pune, India. He works closely with customers across diverse verticals to help 
+            strengthen their security infrastructure and achieve their security goals.
+        </p>
+    </div>
 </div>
 
-<div style="display: flex; align-items: flex-start; margin-bottom: 30px;">
-  <img src="/images/3-Blog/levy-copy-1.png" alt="Le Vy" style="width: 150px; height: 150px; object-fit: cover; margin-right: 20px; border-radius: 8px;">
-  <div>
-    <p><strong>Le Vy</strong>  is the AI Team Lead at Parcel Perform, where she drives the development of AI applications and explores emerging AI research. She started her career in data analysis and deepened her focus on AI through a Master’s in Artificial Intelligence. Passionate about applying data and AI to solve real business problems, she also dedicates time to mentoring aspiring technologists and building a supportive community for youth in tech. Through her work, Vy actively challenges gender norms in the industry and champions lifelong learning as a key to innovation.</p>
-  </div>
-</div>
-
-<div style="display: flex; align-items: flex-start; margin-bottom: 30px;">
-  <img src="/images/3-Blog/junkai.png" alt="Loke Jun Kai" style="width: 150px; height: 150px; object-fit: cover; margin-right: 20px; border-radius: 8px;">
-  <div>
-    <p><strong>Loke Jun Kai</strong>  is a GenAI/ML Specialist Solutions Architect in AWS, covering strategic customers across the ASEAN region. He works with customers ranging from Start-up to Enterprise to build cutting-edge use cases and scalable GenAI Platforms. His passion in the AI space, constant research and reading, have led to many innovative solutions built with concrete business outcomes. Outside of work, he enjoys a good game of tennis and chess.</p>
-  </div>
+<div style="display: flex; gap: 20px; padding: 20px; border: 1px solid #e5e7eb; border-radius: 6px; margin-bottom: 24px;">
+    <img src="https://d2908q01vomqb2.cloudfront.net/22d200f8670dbdb3e253a90eee5098477c95c23d/2025/08/22/Satish-Kamat-author.jpg" 
+         width="130" 
+         style="border-radius: 4px;">
+    <div>
+        <h3>Satish Kamat</h3>
+        <p>
+            Satish is a Senior Delivery Consultant in Application Development at AWS Professional Services,
+            based in Pune, India. He works closely with customers in their cloud transformation and migration 
+            journeys across various verticals like BFSI, automotive, and telecom.
+        </p>
+    </div>
 </div>

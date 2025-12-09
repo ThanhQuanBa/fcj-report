@@ -1,33 +1,33 @@
 ---
 title: "Báo cáo thực tập"
-date: "2025-08-11"
+
 weight: 1
 chapter: false
 ---
 
 # Báo cáo thực tập
+
 ### Thông tin sinh viên:
-&emsp; **Họ và tên:** Đặng Trường Huy
 
-&emsp; **Số điện thoại:** 0913758911
+&emsp; **Họ và tên:** Quan Ba Thanh
 
-&emsp; **Email:** huydtse180132@fpt.edu.vn
+&emsp; **Số điện thoại:** 0961965741
+
+&emsp; **Email:** thanhqbse180150@fpt.edu.vn
 
 &emsp; **Trường:** FPT University
 
 &emsp; **Ngành:** Công nghệ thông tin
 
-&emsp; **Lớp:** AWS092025
+&emsp; **Lớp:** AWS082025
 
 &emsp; **Công ty thực tập:** Công ty TNHH Amazon Web Services Vietnam
 
 &emsp; **Vị trí thực tập:** FCJ Cloud Intern
 
-&emsp; **Thời gian thực tập:** Từ ngày 08/09/2025 đến ngày 24/12/2025
+&emsp; **Thời gian thực tập:** Từ ngày 06/09/2025 đến ngày 28/11/2025
 
-![Ảnh đại diện của bạn](/images/DangTruongHuy.jpg)
-
-
+![Ảnh đại diện của bạn](/images/avata.jpg)
 
 ### Nội dung báo cáo
 

@@ -1,6 +1,5 @@
 ---
-title: "Nhật ký tuần 7"
-date: "2025-10-20"
+title: "Worklog Tuần 7"
 weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
@@ -8,44 +7,25 @@ pre: " <b> 1.7. </b> "
 
 ### Mục tiêu tuần 7:
 
-* Hiểu các khái niệm cơ bản và use case chính của Amazon S3  
-* Nắm vững khái niệm cơ bản và các trường hợp sử dụng chính của Amazon S3  
-* Tạo và cấu hình S3 bucket để lưu trữ website tĩnh  
-* Thực hành cấu hình quyền truy cập, tích hợp CloudFront và bật versioning  
+- Hiểu rõ vai trò và cách cấu hình **EC2 Auto Scaling Group (ASG)** để tự động mở rộng và thu hẹp tài nguyên.
+- Nắm vững kiến trúc và cách hoạt động của **Elastic Load Balancer (ELB)** (đặc biệt là ALB) để phân phối lưu lượng truy cập.
+- Thành thạo việc sử dụng **Amazon CloudWatch** để thu thập metrics, logs, tạo Dashboard và thiết lập Alarms.
+- Thực hành thiết lập **Scaling Policy** dựa trên các chỉ số giám sát.
 
-### Các công việc trong tuần:
-| Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
-| --- | --------- | ------------ | --------------- | ------------------- |
-| 1   | - **Module:** Bắt đầu với Amazon S3 <br>&emsp;+ Tìm hiểu các khái niệm cơ bản: bucket, object, region, host website tĩnh | 20/10/2025 | 20/10/2025 | <https://000057.awsstudygroup.com/> |
-| 2   | - **Lab (Phần 1):** Tạo và chuẩn bị S3 bucket <br>&emsp;2. Tạo S3 bucket <br>&emsp;2.1 Tải source code về máy (load data) <br>&emsp;3. Bật tính năng static website hosting | 21/10/2025 | 21/10/2025 | <https://000057.awsstudygroup.com/> |
-| 3   | - **Lab (Phần 2):** Quyền truy cập public và kiểm thử <br>&emsp;4. Cấu hình public access block <br>&emsp;5. Cấu hình object public <br>&emsp;6. Kiểm tra website tĩnh | 22/10/2025 | 22/10/2025 | <https://000057.awsstudygroup.com/> |
-| 4   | - **Lab (Phần 3):** CloudFront, versioning và replication <br>&emsp;7. Tăng tốc website tĩnh với CloudFront <br>&emsp;7.1 Chặn toàn bộ public access trực tiếp S3 <br>&emsp;7.2 Cấu hình Amazon CloudFront <br>&emsp;7.3 Kiểm tra truy cập qua CloudFront <br>&emsp;8. Bật bucket versioning <br>&emsp;9. Di chuyển object <br>&emsp;10. Replication object giữa nhiều Region <br>&emsp;11. Dọn dẹp tài nguyên <br>&emsp;12. Ghi chú và best practice | 23/10/2025 | 23/10/2025 | <https://000057.awsstudygroup.com/> |
-| 5   | - **Thực hành & Ôn tập:** <br>&emsp;+ Lặp lại toàn bộ quy trình S3 static website (tạo bucket, upload code, host website) <br>&emsp;+ Thực hành lại cấu hình public access, CloudFront và versioning <br>&emsp;+ Xem lại ghi chú và best practice từ lab | 24/10/2025 | 24/10/2025 | <https://000057.awsstudygroup.com/> |
+### Các công việc cần triển khai trong tuần này:
 
-### 🏆 **Thành tựu tuần 7**
+| Thứ | Công việc                                                                                                                                                                                                                                                                                               | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
+| :-- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------- | :-------------- | :---------------------------------------- |
+| 2   | - Đọc và hiểu kiến trúc **Auto Scaling Group (ASG)**, Launch Template. <br> - Tìm hiểu các loại Load Balancer (Classic, Application, Network). <br> - **Thực hành:** Tạo Launch Template và cấu hình một ASG cơ bản.                                                                                    | 20/10/2025   | 20/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Tìm hiểu chuyên sâu về **Application Load Balancer (ALB)** và các thành phần (Listener, Target Group, Health Check). <br> - **Thực hành:** <br>&emsp; + Tạo ALB, Target Group. <br>&emsp; + Đăng ký các EC2 Instance của ASG vào Target Group.                                                        | 21/10/2025   | 21/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Tìm hiểu về dịch vụ giám sát **Amazon CloudWatch** (Metrics, Logs, Events). <br> - **Thực hành:** <br>&emsp; + Xem các Metrics của EC2, ALB, ASG trên CloudWatch. <br>&emsp; + Tạo một CloudWatch Dashboard để theo dõi các chỉ số quan trọng (CPU Utilization, Request Count).                       | 22/10/2025   | 22/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Tìm hiểu về **CloudWatch Alarms** và các loại **Scaling Policy** (Target Tracking, Step Scaling). <br> - **Thực hành:** <br>&emsp; + Tạo CloudWatch Alarm dựa trên chỉ số CPU Utilization (ví dụ: > 80%). <br>&emsp; + Cấu hình Scaling Policy cho ASG sử dụng Alarm vừa tạo (scale out khi CPU cao). | 23/10/2025   | 23/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Kiểm tra & Dọn dẹp Tài nguyên:** <br> - **Thực hành:** <br>&emsp; + Kiểm tra quá trình Scale Out/In hoạt động. <br>&emsp; + **Dọn dẹp:** Xóa CloudWatch Alarms, xóa ASG (sẽ tự động chấm dứt EC2), xóa ALB, xóa Launch Template.                                                                    | 24/10/2025   | 24/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
-* **Nắm cơ bản về Amazon S3**
-  * Hiểu Amazon S3 là dịch vụ lưu trữ object trên đám mây
-  * Nắm rõ khái niệm bucket, object, region và cách host website tĩnh trên S3
+### Kết quả đạt được tuần 7:
 
-* **Tạo và cấu hình S3 bucket**
-  * Tạo S3 bucket để lưu trữ website tĩnh
-  * Tải source code về máy và upload nội dung lên S3
-  * Bật tính năng static website hosting cho bucket
-
-* **Quản lý public access và kiểm tra website**
-  * Cấu hình public access block cho bucket
-  * Thiết lập quyền public cho các object cần thiết
-  * Mở URL website tĩnh và kiểm tra hoạt động
-
-* **Tích hợp Amazon CloudFront**
-  * Chặn truy cập công khai trực tiếp đến S3 bucket
-  * Cấu hình CloudFront để phân phối nội dung từ S3
-  * Kiểm tra truy cập qua CloudFront để cải thiện tốc độ và bảo mật
-
-* **Sử dụng versioning và replication**
-  * Bật bucket versioning để theo dõi các phiên bản object
-  * Di chuyển object giữa các bucket/thư mục khi cần
-  * Cấu hình cross-Region replication cho object
-
-
+- **Khả năng mở rộng:** Triển khai thành công kiến trúc ứng dụng có khả năng tự động mở rộng (Scale Out/In) thông qua **ASG** và **Launch Template**.
+- **Cân bằng tải:** Hiểu và cấu hình được **Application Load Balancer (ALB)** để phân phối lưu lượng truy cập và thực hiện Health Check hiệu quả.
+- **Giám sát (Observability):** Nắm vững cách sử dụng **CloudWatch** để thu thập, hình dung (Dashboard) và theo dõi các chỉ số sức khỏe của tài nguyên.
+- **Tự động hóa:** Thiết lập thành công cơ chế tự động mở rộng dựa trên hiệu suất (Scaling Policy và CloudWatch Alarms).
+- **Quản lý Chi phí:** Nắm vững quy trình dọn dẹp các tài nguyên đắt tiền như ALB và ASG.

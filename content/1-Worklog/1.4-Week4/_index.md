@@ -1,6 +1,5 @@
 ---
 title: "Week 4 Worklog"
-date: "2025-09-29"
 weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
@@ -8,39 +7,25 @@ pre: " <b> 1.4. </b> "
 
 ### Week 4 Objectives:
 
-* Deploy AWS Backup to automate data protection processes
-* Explore AWS Storage Gateway for hybrid cloud storage
-* Get started with Amazon S3 fundamentals and static website hosting
+- Understand the role, architecture, and durability of **Amazon S3**.
+- Become proficient in creating and managing **Buckets**, including applying security measures such as **Bucket Policy**.
+- Master S3 storage classes (**Standard, IA, Glacier**) and how to use **Lifecycle Rules** for cost optimization.
+- Practice deploying a **Static Website Hosting** solution on S3.
 
-### Tasks to be carried out this week:
-| Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ---- | ---------- | --------------- | ------------------ |
-| 1   | - Deploy AWS Backup for the system <br>&emsp;+ Overview of AWS Backup and Amazon SNS <br>&emsp;+ Deploy the infrastructure <br>&emsp;+ Create backup plans for AWS resources | 29/09/2025 | 29/09/2025 | <https://000013.awsstudygroup.com/> |
-| 2   | - Finalize AWS Backup setup <br>&emsp;+ Configure SNS notifications <br>&emsp;+ Test restore procedures <br>&emsp;+ Clean up resources | 30/09/2025 | 30/09/2025 | <https://000013.awsstudygroup.com/> |
-| 3   | - File Storage Gateway workshop <br>&emsp;+ Preparation and setup <br>&emsp;+ Create the Storage Gateway <br>&emsp;+ Create file shares <br>&emsp;+ Mount shares on on-premises machine <br>&emsp;+ Resource cleanup | 01/10/2025 | 01/10/2025 | <https://000024.awsstudygroup.com/> |
-| 4   | - Amazon S3 basics (Part 1) <br>&emsp;+ Introduction to Amazon S3 <br>&emsp;+ Preparation and setup <br>&emsp;+ Enable static website hosting <br>&emsp;+ Configure public access block and object permissions <br>&emsp;+ Test the website | 02/10/2025 | 02/10/2025 | <https://000057.awsstudygroup.com/> |
-| 5   | - Amazon S3 advanced topics (Part 2) <br>&emsp;+ Speed up static website with CloudFront <br>&emsp;+ Enable bucket versioning <br>&emsp;+ Move objects and lifecycle policies <br>&emsp;+ Configure cross-region replication <br>&emsp;+ Notes & best practices | 03/10/2025 | 03/10/2025 | <https://000057.awsstudygroup.com/> |
+### Tasks to be completed this week:
 
+| Day | Task                                                                                                                                                                                                                                                                                        | Start Date | Completion Date | Reference Materials                       |
+| :-- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------- |
+| 2   | - Read and understand the basic architecture of **Amazon S3** (Object, Key, Bucket, Region). <br> - Learn about security features: Block Public Access, Access Control List (ACL). <br> - **Practice:** Create a new S3 Bucket and configure Block Public Access settings.                  | 29/09/2025 | 29/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Learn about **S3 Storage Classes** (Standard, Standard-IA, One Zone-IA, Glacier, Deep Archive). <br> - Learn how **Lifecycle Rules** automate transitions between classes. <br> - **Practice:** Configure a Lifecycle Rule to transition older objects to Standard-IA.                    | 30/09/2025 | 30/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Learn about **Versioning** and how to restore deleted objects. <br> - Learn about **Bucket Policies** to centrally control access. <br> - **Practice:** Enable Versioning and test deleting/restoring an object.                                                                          | 01/10/2025 | 01/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Learn about **Static Website Hosting** on S3. <br> - **Practice:** <br>&emsp; + Upload HTML/CSS/JS files (Index.html & Error.html). <br>&emsp; + Enable Static Website Hosting and configure a Bucket Policy for public read access. <br>&emsp; + Access the website via the S3 endpoint. | 02/10/2025 | 02/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Cleanup & S3 CLI Review:** <br> - **Practice:** <br>&emsp; + Use **AWS CLI** to upload/download/sync S3 data (`aws s3 cp`, `aws s3 sync`). <br>&emsp; + **Cleanup:** Disable Versioning, delete all objects (including older versions), then delete the Bucket.                         | 03/10/2025 | 03/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
-### 🏆 **Week 4 Achievements**
+### Week 4 Achievements:
 
-* **Understand AWS Backup service**
-  * Understand AWS Backup as a centralized data-protection solution
-  * Created automated backup plans for multiple AWS resources
-  * Configured backup policies for EBS, RDS, DynamoDB, and EFS
-  * Configured SNS notifications for backup events
-  * Successfully tested backup and restore procedures
-
-* **Amazon S3 fundamentals and static website hosting**
-  * Learned core Amazon S3 object storage concepts
-  * Configured static website hosting on S3
-  * Set up public access blocks and adjusted object permissions
-  * Implemented CloudFront to accelerate the site
-  * Studied S3 versioning and object lifecycle management
-
-* **Advanced S3 features**
-  * Configured bucket versioning for better data protection
-  * Implemented object transitions and lifecycle policies
-  * Set up cross-region replication for disaster recovery
-  * Applied S3 best practices and security recommendations
-  * Understand S3 storage classes and cost-optimization strategies
+- **S3 Management:** Successfully created, configured, and managed S3 Buckets; understood the role of **Block Public Access** and **ACL**.
+- **Cost Optimization:** Gained solid knowledge of S3 **Storage Classes** and practiced using **Lifecycle Rules** to automate data transitions and optimize storage costs.
+- **Security & Control:** Successfully enabled/disabled **Versioning** and applied **Bucket Policies** to manage public access and IAM permissions.
+- **Practical Application:** Successfully deployed a static website on S3 and accessed it through the public endpoint.
+- **CLI Operations:** Became proficient with AWS CLI commands for S3 data management (upload, download, sync).

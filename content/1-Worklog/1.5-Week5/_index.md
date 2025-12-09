@@ -1,6 +1,5 @@
 ---
 title: "Week 5 Worklog"
-date: "2025-10-06"
 weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
@@ -8,51 +7,25 @@ pre: " <b> 1.5. </b> "
 
 ### Week 5 Objectives:
 
-* Master AWS Storage Services and Amazon S3 comprehensive features
-* Learn AWS Backup and VM Import/Export strategies
-* Practice Storage Gateway for hybrid cloud storage solutions
+- Understand the role and benefits of **Amazon RDS** compared to managing databases manually on EC2.
+- Become proficient in creating and connecting to a DB Instance (e.g., MySQL or PostgreSQL).
+- Master key RDS features: **Multi-AZ** (High Availability), **Read Replicas** (Read Scalability), and **Snapshot/Backup**.
+- Practice managing network security for DB Instances using Security Groups.
 
-### Tasks to be carried out this week:
-| Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ---- | ---------- | --------------- | ------------------ |
-| 1   | - **Module 04-01:** Dịch Vụ Lưu Trữ Trên AWS <br>&emsp;- **Module 04-02:** Amazon Simple Storage Service (S3) - Access Point - Storage Class <br>&emsp;- **Module 04-03:** S3 Static Website & CORS - Control Access - Object Key & Performance - Glacier <br>&emsp;- **Module 04-04:** Snow Family - Storage Gateway - Backup <br>&emsp;- **Lab 13:** AWS Backup Implementation <br>&emsp;+ Create S3 Bucket for backup storage <br>&emsp;+ Deploy backup infrastructure <br>&emsp;+ Create comprehensive Backup Plan <br>&emsp;+ Set up notification systems with SNS <br>&emsp;+ Test restore operations <br>&emsp;+ Clean up backup resources | 06/10/2025 | 06/10/2025 | <https://000013.awsstudygroup.com/> |
-| 2   | - **Lab 14:** VM Import/Export Complete Workflow <br>&emsp;+ Set up VMware Workstation environment <br>&emsp;+ Export Virtual Machine from on-premises <br>&emsp;+ Upload virtual machine to AWS S3 <br>&emsp;+ Import virtual machine to AWS EC2 <br>&emsp;+ Deploy Instance from custom AMI <br>&emsp;+ Configure S3 bucket ACL for VM storage <br>&emsp;+ Export virtual machine from EC2 Instance <br>&emsp;+ Resource cleanup on AWS Cloud | 07/10/2025 | 07/10/2025 | <https://000014.awsstudygroup.com/> |
-| 3   | - **Practice Day:** Hands-on Review <br>&emsp;+ Practice AWS Storage Services configuration <br>&emsp;+ Review S3 advanced features implementation <br>&emsp;+ Test AWS Backup scenarios <br>&emsp;+ Validate VM Import/Export workflow <br>&emsp;+ Troubleshooting common issues | 08/10/2025 | 08/10/2025 | |
-| 4   | - **Lab 24:** Storage Gateway Implementation <br>&emsp;+ Create Storage Gateway <br>&emsp;+ Create File Shares configuration <br>&emsp;+ Mount File shares on on-premises machine <br>&emsp;+ Test hybrid storage functionality <br>&emsp;- **Practice Session:** <br>&emsp;+ Storage Gateway troubleshooting <br>&emsp;+ Performance optimization <br>&emsp;+ Best practices review | 09/10/2025 | 09/10/2025 | <https://000024.awsstudygroup.com/> |
-| 5   | - **Comprehensive Practice & Review** <br>&emsp;+ End-to-end AWS Storage services workflow <br>&emsp;+ AWS Backup automation testing <br>&emsp;+ VM migration scenario practice <br>&emsp;+ Storage Gateway integration testing <br>&emsp;+ Week 5 knowledge consolidation | 10/10/2025 | 10/10/2025 | |
+### Tasks to be completed this week:
 
+| Day | Task                                                                                                                                                                                                                                                                                                     | Start Date | Completion Date | Reference Materials                       |
+| :-- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------- | :-------------- | :---------------------------------------- |
+| 2   | - Read and understand the architecture of **Amazon RDS** (DB Instance, Engine, Master Username/Password, DB Security Group). <br> - Compare RDS with self-managed databases on EC2. <br> - **Practice:** Launch a DB Instance (Free Tier) in the VPC created in Week 3 (choose a Private Subnet).        | 06/10/2025 | 06/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Learn how to connect to and secure an RDS instance. <br> - **Practice:** <br>&emsp; + Configure the **Security Group** to allow access only from the **EC2 Security Group** created in Week 2. <br>&emsp; + Use a database client or EC2 instance to connect and create a basic table.                 | 07/10/2025 | 07/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Learn about **Multi-AZ Deployment** to ensure High Availability (HA). <br> - Learn about **Automated Backups** and **DB Snapshots**. <br> - **Practice:** Enable Multi-AZ for the instance and create a manual DB Snapshot.                                                                            | 08/10/2025 | 08/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Learn about **Read Replicas** to offload read traffic. <br> - **Practice:** <br>&emsp; + Create a Read Replica for the primary DB Instance. <br>&emsp; + Simulate connecting an application to the Read Replica for read scaling. <br>&emsp; + Learn how to promote a Read Replica to a standalone DB. | 09/10/2025 | 09/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Cleanup & Optimization:** <br> - **Practice:** <br>&emsp; + Delete the Read Replica. <br>&emsp; + Delete the primary DB Instance (Note: Uncheck “Final Snapshot” if not needed). <br>&emsp; + Clean up all related Snapshots and Security Groups.                                                    | 10/10/2025 | 10/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
-### 🏆 **Week 5 Achievements**
+### Week 5 Achievements:
 
-* **Learned AWS Storage Services**
-  * Understood AWS storage service types and categories
-  * Learned S3 Access Points and Storage Classes
-  * Configured S3 Static Website hosting and CORS
-  * Explored S3 performance optimization and Glacier
-  * Studied AWS Snow Family and Storage Gateway
-
-* **Completed AWS Backup Implementation**
-  * Created S3 bucket for backup storage
-  * Deployed backup infrastructure successfully
-  * Set up backup plans and SNS notifications
-  * Tested data restore operations
-  * Cleaned up backup resources properly
-
-* **Mastered VM Import/Export Process**
-  * Set up VMware Workstation environment
-  * Exported and imported virtual machines
-  * Deployed instances from custom AMI
-  * Configured S3 bucket ACL for VM storage
-  * Completed VM migration with cleanup
-
-* **Implemented Storage Gateway**
-  * Created and configured Storage Gateway
-  * Set up File Shares successfully
-  * Mounted file shares on on-premises machines
-  * Tested hybrid storage functionality
-
-* **Gained Hands-on Experience**
-  * Practiced AWS Storage services configuration
-  * Performed backup and restore testing
-  * Completed VM migration scenarios
-  * Learned troubleshooting techniques
+- **RDS Management:** Gained a solid understanding of RDS benefits and became proficient in creating, configuring, and connecting to DB Instances.
+- **Network Security:** Learned how to use Security Groups to restrict database access to specific resources (e.g., EC2), ensuring network-level protection.
+- **High Availability:** Successfully practiced enabling **Multi-AZ** to protect databases from AZ failures.
+- **Scalability:** Understood and practiced creating **Read Replicas** to improve read performance and reduce load on the primary DB.
+- **Backup & Recovery:** Learned how to create **DB Snapshots** and how RDS handles **Automated Backups**.

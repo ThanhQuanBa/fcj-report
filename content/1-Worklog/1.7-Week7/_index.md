@@ -1,6 +1,5 @@
 ---
 title: "Week 7 Worklog"
-date: "2025-10-20"
 weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
@@ -8,42 +7,25 @@ pre: " <b> 1.7. </b> "
 
 ### Week 7 Objectives:
 
-* Understand Amazon S3 fundamentals and main use cases  
-* Review Amazon S3 fundamentals and common use cases  
-* Create and configure S3 buckets for hosting static websites  
-* Practice access control, CloudFront integration, and enabling versioning  
+- Clearly understand the role and configuration of **EC2 Auto Scaling Group (ASG)** for automatic scaling in and out.
+- Understand the architecture and operation of the **Elastic Load Balancer (ELB)** (especially ALB) for traffic distribution.
+- Become proficient in using **Amazon CloudWatch** to collect metrics, logs, build Dashboards, and configure Alarms.
+- Practice setting up **Scaling Policies** based on monitoring metrics.
 
-### Tasks to be carried out this week:
-| Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ---- | ---------- | --------------- | ------------------ |
-|  1  | - **Module:** Starting with Amazon S3 <br>&emsp;+ Learn about Amazon S3 basics and concepts (buckets, objects, regions) | 20/10/2025 | 20/10/2025 | <https://000057.awsstudygroup.com/> |
-|  2  | - **Lab (Part 1):** Create and prepare S3 bucket <br>&emsp;2. Create S3 bucket <br>&emsp;2.1 Download source code to the device (load data) <br>&emsp;3. Enable static website feature | 21/10/2025 | 21/10/2025 | <https://000057.awsstudygroup.com/> |
-|  3  | - **Lab (Part 2):** Public access and testing <br>&emsp;4. Configure public access block <br>&emsp;5. Configure public objects <br>&emsp;6. Test static website | 22/10/2025 | 22/10/2025 | <https://000057.awsstudygroup.com/> |
-|  4   | - **Lab (Part 3):** CloudFront, versioning and replication <br>&emsp;7. Accelerate static websites with CloudFront <br>&emsp;7.1 Block all public access <br>&emsp;7.2 Configure Amazon CloudFront <br>&emsp;7.3 Test Amazon CloudFront <br>&emsp;8. Bucket versioning <br>&emsp;9. Move objects <br>&emsp;10. Replicate objects across multiple Regions <br>&emsp;11. Clean up resources <br>&emsp;12. Notes & Best Practices | 23/10/2025 | 23/10/2025 | <https://000057.awsstudygroup.com/> |
-|  5   | - **Practice & Review:** <br>&emsp;+ Repeat full S3 static website workflow (create bucket, upload code, host website) <br>&emsp;+ Practice configuring public access, CloudFront, and versioning again <br>&emsp;+ Review notes and best practices from the lab | 24/10/2025 | 24/10/2025 | <https://000057.awsstudygroup.com/> |
+### Tasks to Be Completed This Week:
 
-### 🏆 **Week 7 Achievements**
+| Day | Tasks                                                                                                                                                                                                                                                                                                            | Start Date | End Date   | Reference Material                        |
+| :-- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------- | :--------- | :---------------------------------------- |
+| 2   | - Read and understand the architecture of **Auto Scaling Group (ASG)** and Launch Template. <br> - Study types of Load Balancers (Classic, Application, Network). <br> - **Hands-on:** Create a Launch Template and configure a basic ASG.                                                                       | 20/10/2025 | 20/10/2025 | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Deep dive into **Application Load Balancer (ALB)** and its components (Listener, Target Group, Health Check). <br> - **Hands-on:** <br>&emsp; + Create an ALB and Target Group. <br>&emsp; + Register ASG EC2 Instances into the Target Group.                                                                 | 21/10/2025 | 21/10/2025 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Study **Amazon CloudWatch** (Metrics, Logs, Events). <br> - **Hands-on:** <br>&emsp; + View EC2, ALB, and ASG metrics on CloudWatch. <br>&emsp; + Create a CloudWatch Dashboard to monitor key metrics (CPU Utilization, Request Count).                                                                       | 22/10/2025 | 22/10/2025 | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Learn about **CloudWatch Alarms** and types of **Scaling Policies** (Target Tracking, Step Scaling). <br> - **Hands-on:** <br>&emsp; + Create a CloudWatch Alarm based on CPU Utilization (e.g., > 80%). <br>&emsp; + Configure a Scaling Policy for ASG using the created Alarm (scale out when CPU is high). | 23/10/2025 | 23/10/2025 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Resource Review & Cleanup:** <br> - **Hands-on:** <br>&emsp; + Validate the Scale Out/In process. <br>&emsp; + **Cleanup:** Delete CloudWatch Alarms, delete ASG (which will terminate EC2 instances), delete ALB, and delete the Launch Template.                                                           | 24/10/2025 | 24/10/2025 | <https://cloudjourney.awsstudygroup.com/> |
 
-* **Amazon S3 Basics**
-  * Clarified common uses of Amazon S3
-  * Reviewed key concepts: buckets, objects, regions, and hosting static website content
+### Week 7 Achievements:
 
-* **Created and Configured S3 Bucket**
-  * Created an S3 bucket for hosting a static website
-  * Downloaded the source code locally and uploaded content to S3
-  * Enabled static website hosting on the bucket
-
-* **Managed Public Access and Testing**
-  * Adjusted S3 public access block settings
-  * Made required objects publicly accessible
-  * Accessed and tested the static website URL
-
-* **Integrated with Amazon CloudFront**
-  * Restricted direct public access to the S3 bucket
-  * Configured a CloudFront distribution in front of the S3 website
-  * Tested the CloudFront distribution URL for improved performance and security
-
-* **Used Versioning and Replication**
-  * Enabled bucket versioning to track object versions
-  * Moved objects between buckets/folders as needed
-  * Set up cross-Region replication for objects
+- **Scalability:** Successfully deployed an application architecture capable of automatic scaling (Scale Out/In) using **ASG** and **Launch Template**.
+- **Load Balancing:** Understood and configured **Application Load Balancer (ALB)** to distribute traffic and perform effective health checks.
+- **Observability:** Gained solid understanding of **CloudWatch** for collecting, visualizing (Dashboard), and monitoring resource health metrics.
+- **Automation:** Successfully set up performance-based automatic scaling using **Scaling Policies** and **CloudWatch Alarms**.
+- **Cost Management:** Learned how to properly clean up expensive resources such as ALB and ASG.

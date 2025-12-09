@@ -1,40 +1,32 @@
 ---
 title: "Week 12 Worklog"
-date: "2025-11-24"
 weight: 12
 chapter: false
 pre: " <b> 1.12. </b> "
 ---
 
-### Week 12 Objectives:
+### Objectives for Week 12:
 
-* Practice building and inspecting cost-related data in AWS  
-* Get familiar with different ways to interact with AWS (CloudShell, Console, SDK)  
-* Use AWS Glue DataBrew and Cloud9 to prepare and transform data  
-* Build an end-to-end analytics pipeline with Glue, EMR, Athena, Kinesis Data Analytics, QuickSight, Lambda, and Redshift  
+- Synthesize and consolidate all knowledge about core AWS services learned over the past 11 weeks.
+- Assess knowledge and identify areas for improvement (Weak Areas).
+- Plan details for the **Final Project** or prepare for AWS certifications.
+- Thoroughly clean up all resources created throughout the internship.
 
-### Tasks to be carried out this week:
-| Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ---- | ---------- | --------------- | ------------------ |
-| 1   | - **Lab 40:** (Cost and usage data) <br>&emsp;2.1 Preparing the database <br>&emsp;2.2 Building a database <br>&emsp;3.1 Data in the table <br>&emsp;3.2 Cost <br>&emsp;3.3 Tagging and cost allocation <br>&emsp;3.4 Usage <br>&emsp;3.5 Additional result query <br>&emsp;4 Clean up resources | 24/11/2025 | 24/11/2025 | <https://000040.awsstudygroup.com/> |
-| 2   | - **Lab 60 & Lab 70:** AWS tools and data preparation <br>&emsp;**Lab 60:** CloudShell, Console, SDK <br>&emsp;**Lab 70:** Cloud9, dataset, S3, and AWS Glue DataBrew (profiling, clean & transform) | 25/11/2025 | 25/11/2025 | <https://000060.awsstudygroup.com/>, <https://000070.awsstudygroup.com/> |
-| 3   | - **Practice:** Review Lab 40 & Lab 70 <br>&emsp;+ Practice checking cost/usage data and queries from Lab 40 <br>&emsp;+ Practice using Cloud9 and S3 to prepare data <br>&emsp;+ Practice creating and running basic DataBrew jobs for profiling and cleaning data <br>&emsp;+ Write short notes about how these tools help with cost and data preparation | 26/11/2025 | 26/11/2025 | <https://000040.awsstudygroup.com/>, <https://000070.awsstudygroup.com/>  |
-| 4   | - **Lab 72:** End-to-end analytics pipeline <br>&emsp;Preparatory steps, ingest & store, catalog data <br>&emsp;Transform with Glue (interactive & GUI), DataBrew, EMR <br>&emsp;Analysis with Athena and Kinesis Data Analytics <br>&emsp;Visualize in QuickSight, serve with Lambda, warehouse on Redshift | 27/11/2025 | 27/11/2025 | <https://000072.awsstudygroup.com/> |
-| 5   | - **Lab 73 + Practice:** Dashboards and review <br>&emsp;Build dashboard, improve dashboard, create interactive dashboard <br>&emsp;Practice reviewing pipeline parts from Lab 72 (Athena, Kinesis Data Analytics, QuickSight, Lambda, Redshift) <br>&emsp;Note simple best practices for building clear dashboards and reports | 28/11/2025 | 28/11/2025 | <https://000073.awsstudygroup.com/>, <https://000072.awsstudygroup.com/> |
+### Tasks to be implemented this week:
 
-### 🏆 Week 12 Achievements
+| Day | Task                                                                                                                                                                                                                                                      | Start Date | Completion Date | Resources                                 |
+| :-- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------- | :-------------- | :---------------------------------------- |
+| 2   | - **Review Core Infrastructure:** Review **IAM, EC2, VPC, S3**. <br> - **Practice:** Manually redraw a complete VPC architecture (Public/Private Subnet) and deploy EC2 with IAM Role.                                                                    | 24/11/2025 | 24/11/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Review Databases & Scaling:** Review **RDS, DynamoDB, ElastiCache, Auto Scaling, ELB**. <br> - **Practice:** Analyze a specific Use-case (e.g., E-commerce) and decide whether to use RDS, DynamoDB, or ElastiCache for each data type.               | 25/11/2025 | 25/11/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Review Serverless & Integration:** Review **Lambda, API Gateway, SQS, SNS, Step Functions**. <br> - **Practice:** Outline an asynchronous workflow for an image processing task using **S3 -> Lambda -> SQS**.                                        | 26/11/2025 | 26/11/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - **Review Security & Monitoring:** Review **CloudWatch, GuardDuty, WAF, Budget**. <br> - **Practice:** <br>&emsp; + Set up a **Cost Budget** (if not already exists). <br>&emsp; + Create **CloudWatch Alarm** for critical resources (CPU, Disk Usage). | 27/11/2025 | 27/11/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Summary & Plan:** <br> - **Final Resource Cleanup:** Check all Regions to ensure no resources are running (Zero Resource). <br> - Outline **Final Project** or build a roadmap for **AWS Solutions Architect Associate** certification.               | 28/11/2025 | 28/11/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
-* **Cost and usage data basics**
-  * Built a simple database to store cost and usage data
-  * Viewed table data, costs, tags, and usage information
-  * Ran additional queries and cleaned up lab resources
+### Results achieved in Week 12:
 
-* **AWS tools and data preparation**
-  * Used CloudShell, Console, and SDK to interact with AWS
-  * Created a Cloud9 environment and worked with datasets in S3
-  * Used AWS Glue DataBrew for data profiling, cleaning, and transformation
+- **Knowledge Systematization:** Completed review of all major AWS service groups, from Compute, Storage, Database, Networking to Serverless and Security.
+- **Architectural Thinking:** Capable of analyzing application requirements and selecting the most appropriate AWS services to solve the problem.
+- **Cost Management (Most Important):** Ensured the AWS account is completely cleaned (Zero Resource), strictly adhering to cost management principles.
+- **Career Orientation:** Built a clear plan for the next steps (Project, Certification) to continue developing on the Cloud Engineer path.
 
-* **End-to-end analytics pipeline**
-  * Ingested and stored data, created a data catalog with Glue
-  * Transformed data using Glue (interactive, GUI), DataBrew, and EMR
-  * Analyzed data with Athena and Kinesis Data Analytics
+---

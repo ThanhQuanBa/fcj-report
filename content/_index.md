@@ -1,34 +1,33 @@
 ---
 title: "Internship Report"
-date: "2025-08-11"
+
 weight: 1
 chapter: false
 ---
 
-    
 # Internship Report
 
-
 ### Student Information:
-&emsp; **Full Name:** Dang Truong Huy
 
-&emsp; **Phone Number:** 0913758911
+&emsp; **Full Name:** Quan Ba Thanh
 
-&emsp; **Email:** @fpt.edu.vn
+&emsp; **Phone Number:** 0961965741
+
+&emsp; **Email:** thanhqbse180150@fpt.edu.vn
 
 &emsp; **University:** FPT University
 
 &emsp; **Major:** Information Technology
 
-&emsp; **Class:** AWS092025
+&emsp; **Class:** AWS082025
 
 &emsp; **Internship Company:** Amazon Web Services Vietnam Co., Ltd.
 
 &emsp; **Internship Position:** FCJ Cloud Intern
 
-&emsp; **Internship Duration:** From 08/09/2025 to 24/12/2025
+&emsp; **Internship Duration:** From 06/09/2025 to 28/11/2025
 
-![Your profile picture](/images/DangTruongHuy.jpg)
+![Your profile picture](/images/avata.jpg)
 
 ### Report Content
 

@@ -1,6 +1,5 @@
 ---
 title: "Week 3 Worklog"
-date: "2025-09-22"
 weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
@@ -8,39 +7,24 @@ pre: " <b> 1.3. </b> "
 
 ### Week 3 Objectives:
 
-* Set up AWS Transit Gateway
-* Create Transit Gateway Attachments and Route Tables
-* Learn Amazon EC2 comprehensive concepts and services
-* Study EC2 Auto Scaling, EFS/FSx, Lightsail, and MGN
+- Understand the role and core components of **Amazon Virtual Private Cloud (VPC)**.
+- Become proficient in creating and configuring VPC, Subnets (Public/Private), Internet Gateway (IGW), and Route Tables.
+- Master the two-layer security mechanisms: **Security Group (SG)** and **Network Access Control List (NACL)**.
+- Practice deploying an EC2 Instance into a custom VPC.
 
-### Tasks to be carried out this week:
-| Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ---- | ---------- | --------------- | ------------------ |
-| 1   | - Introduction to AWS Transit Gateway and lab overview <br>&emsp; + Understand Transit Gateway concepts <br>&emsp; + Compare VPC Peering and Transit Gateway <br>&emsp; + Review benefits and common use cases <br>&emsp; + Review lab architecture and prerequisites | 22/09/2025 | 22/09/2025 | <https://000020.awsstudygroup.com/> |
-| 2   | - Create and configure Transit Gateway <br>&emsp; + Set Transit Gateway parameters and settings <br>&emsp; + Verify Transit Gateway configuration | 23/09/2025 | 23/09/2025 | <https://000020.awsstudygroup.com/>|
-| 3   | - Create Transit Gateway attachments and attach VPCs <br>&emsp; + Configure attachment settings <br>&emsp; + Verify attachment status and connectivity | 24/09/2025 | 24/09/2025 | <https://000020.awsstudygroup.com/>|
-| 4   | - Configure Transit Gateway route tables and test connectivity <br>&emsp; + Create TGW route tables <br>&emsp; + Add routes to VPC route tables <br>&emsp; + Test inter-VPC connectivity <br>&emsp; + Clean up resources | 25/09/2025 | 25/09/2025 | <https://000020.awsstudygroup.com/>|
-| 5   | - Module 03-01: Amazon EC2 deep dive <br>&emsp; + EC2 instance families, types and sizing <br>&emsp; + AMI, backup strategies and key pair management <br>&emsp; + EBS vs Instance Store, snapshots and encryption <br>&emsp; + User data and metadata <br>&emsp; + EC2 Auto Scaling overview <br>&emsp; + Brief overview: EFS/FSx, Lightsail, MGN | 26/09/2025 | 26/09/2025 | |
+### Tasks to be completed this week:
 
-### 🏆 **Week 3 Achievements**
+| Day | Task                                                                                                                                                                                                                                                                                                                                  | Start Date | Completion Date | Reference Materials                       |
+| :-- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------- |
+| 2   | - Read and understand **VPC architecture**: IP concepts, CIDR Block, Subnets, Availability Zones (AZ). <br> - **Practice:** Create a new VPC with a custom CIDR block (e.g., `10.0.0.0/16`). <br> - Create two Subnets: one Public and one Private.                                                                                   | 22/09/2025 | 22/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Learn about **Internet Gateway (IGW)**, **Route Table**, and their role in providing Internet access. <br> - **Practice:** <br>&emsp; + Create and attach an IGW to the VPC. <br>&emsp; + Configure the **Public Route Table** to route traffic to the IGW. <br>&emsp; + Associate the Public Route Table with the Public Subnet.   | 23/09/2025 | 23/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Learn about **Security Groups (SG)** (Stateful) and their operation principles. <br> - **Practice:** <br>&emsp; + Launch an EC2 Instance in the Public Subnet. <br>&emsp; + Configure SG to allow only SSH/RDP (Port 22/3389) from your personal IP. <br>&emsp; + Try accessing the instance to validate SG security.               | 24/09/2025 | 24/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Learn about **Network Access Control List (NACL)** (Stateless). <br> - **Practice:** <br>&emsp; + Configure NACL for the Public Subnet (experiment with Deny rules). <br>&emsp; + Clearly distinguish inbound/outbound behavior differences between SG and NACL. <br>&emsp; + Learn the concept of NAT Gateway (in Private Subnet). | 25/09/2025 | 25/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Cleanup & Review:** <br> - **Practice:** <br>&emsp; + Terminate the EC2 Instance. <br>&emsp; + **Delete all VPC components** created earlier in the correct order (Detach IGW → Delete Subnets → Delete Route Tables → Delete VPC) to avoid unnecessary costs. <br>&emsp; + Summarize all VPC components learned.                 | 26/09/2025 | 26/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
-**1. Transit Gateway Concepts & Design**
+### Week 3 Achievements:
 
-- Learned core Transit Gateway concepts and reviewed the lab architecture.
-- Compared Transit Gateway with VPC Peering and discussed typical use cases and trade-offs.
-
-**2. Transit Gateway Attachments**
-
-- Created Transit Gateway attachments and attached VPCs.
-- Verified attachment status and connectivity; validated VPC-to-TGW communications.
-
-**3. Route Tables & Testing**
-
-- Created Transit Gateway route tables and populated routes into VPC route tables.
-- Performed connectivity tests between VPCs and cleaned up test resources.
-
-**4. Amazon EC2 Fundamentals**
-
-- Reviewed EC2 instance families, types and sizing considerations.
-- Covered AMI usage, backup strategies, key pair management, EBS vs Instance Store, snapshots and encryption.
-- Examined user data/metadata and an overview of EC2 Auto Scaling.
+- **VPC Configuration:** Successfully understood and created VPC, Public/Private Subnets, Internet Gateway, and Route Tables for traffic routing.
+- **Network Security:** Mastered and differentiated the two-layer security mechanisms: **Security Group** (Stateful, instance-level) and **NACL** (Stateless, subnet-level).
+- **Basic Deployment:** Successfully deployed an EC2 Instance within a custom VPC and verified Internet connectivity.
+- **Cleanup Skills:** Properly cleaned up all networking resources in the correct order (ensuring no unnecessary leftover components), contributing to efficient cost management.
