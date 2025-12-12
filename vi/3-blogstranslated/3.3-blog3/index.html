@@ -1,0 +1,291 @@
+<!doctype html><html lang=vi class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.134.3"><meta name=description content><meta name=author content="thienlh@thienlu.com"><link rel=icon href=../../../images/favicon.png type=image/png><title>Blog 3 :: Báo cáo thực tập</title>
+<link href=../../../css/nucleus.css?1765542844 rel=stylesheet><link href=../../../css/fontawesome-all.min.css?1765542844 rel=stylesheet><link href=../../../css/hybrid.css?1765542844 rel=stylesheet><link href=../../../css/featherlight.min.css?1765542844 rel=stylesheet><link href=../../../css/perfect-scrollbar.min.css?1765542844 rel=stylesheet><link href=../../../css/auto-complete.css?1765542844 rel=stylesheet><link href=../../../css/atom-one-dark-reasonable.css?1765542844 rel=stylesheet><link href=../../../css/theme.css?1765542844 rel=stylesheet><link href=../../../css/hugo-theme.css?1765542844 rel=stylesheet><link href=../../../css/theme-workshop.css?1765542844 rel=stylesheet><script src=../../../js/jquery-3.3.1.min.js?1765542844></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=../../../vi/3-blogstranslated/3.3-blog3/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><a id=logo href=../../../><svg id="Layer_1" data-name="Layer 1" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff}.cls-2{fill:#f90;fill-rule:evenodd}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09 10.85a4.7 4.7.0 00.19 1.48 7.73 7.73.0 00.54 1.19.77.77.0 01.12.38.64.64.0 01-.32.49l-1 .7a.83.83.0 01-.44.15.69.69.0 01-.49-.23 3.8 3.8.0 01-.6-.77q-.25-.42-.51-1a6.14 6.14.0 01-4.89 2.3 4.54 4.54.0 01-3.32-1.19 4.27 4.27.0 01-1.22-3.2 4.28 4.28.0 011.46-3.4A6.06 6.06.0 017.69 6.46a12.47 12.47.0 011.76.13q.92.13 1.91.36V5.73a3.65 3.65.0 00-.79-2.66A3.81 3.81.0 007.86 2.3a7.71 7.71.0 00-1.79.22 12.78 12.78.0 00-1.79.57 4.55 4.55.0 01-.58.22h-.26q-.35.0-.35-.52V2a1.09 1.09.0 01.12-.58 1.2 1.2.0 01.47-.35A10.88 10.88.0 015.77.32 10.19 10.19.0 018.36.0a6 6 0 014.35 1.35 5.49 5.49.0 011.38 4.09zM7.34 13.38a5.36 5.36.0 001.72-.31A3.63 3.63.0 0010.63 12 2.62 2.62.0 0011.19 11a5.63 5.63.0 00.16-1.44v-.7a14.35 14.35.0 00-1.53-.28 12.37 12.37.0 00-1.56-.1 3.84 3.84.0 00-2.47.67A2.34 2.34.0 005 11a2.35 2.35.0 00.61 1.76A2.4 2.4.0 007.34 13.38zm13.35 1.8a1 1 0 01-.64-.16 1.3 1.3.0 01-.35-.65L15.81 1.51a3 3 0 01-.15-.67.36.36.0 01.41-.41H17.7a1 1 0 01.65.16 1.4 1.4.0 01.33.65l2.79 11 2.59-11A1.17 1.17.0 0124.39.6a1.1 1.1.0 01.67-.16H26.4a1.1 1.1.0 01.67.16 1.17 1.17.0 01.32.65L30 12.39 32.88 1.25A1.39 1.39.0 0133.22.6a1 1 0 01.65-.16h1.54a.36.36.0 01.41.41 1.36 1.36.0 010 .26 3.64 3.64.0 01-.12.41l-4 12.86a1.3 1.3.0 01-.35.65 1 1 0 01-.64.16H29.25a1 1 0 01-.67-.17 1.26 1.26.0 01-.32-.67L25.67 3.64l-2.56 10.7a1.26 1.26.0 01-.32.67 1 1 0 01-.67.17zm21.36.44a11.28 11.28.0 01-2.56-.29 7.44 7.44.0 01-1.92-.67 1 1 0 01-.61-.93v-.84q0-.52.38-.52a.9.9.0 01.31.06l.42.17a8.77 8.77.0 001.83.58 9.78 9.78.0 002 .2 4.48 4.48.0 002.43-.55 1.76 1.76.0 00.86-1.57 1.61 1.61.0 00-.45-1.16A4.29 4.29.0 0043 9.22l-2.41-.76A5.15 5.15.0 0138 6.78a3.94 3.94.0 01-.83-2.41 3.7 3.7.0 01.45-1.85 4.47 4.47.0 011.19-1.37 5.27 5.27.0 011.7-.86A7.4 7.4.0 0142.6.0a8.87 8.87.0 011.12.07q.57.07 1.08.19t.95.26a4.27 4.27.0 01.7.29 1.59 1.59.0 01.49.41.94.94.0 01.15.55v.79q0 .52-.38.52a1.76 1.76.0 01-.64-.2 7.74 7.74.0 00-3.2-.64 4.37 4.37.0 00-2.21.47 1.6 1.6.0 00-.79 1.48 1.58 1.58.0 00.49 1.18 4.94 4.94.0 001.83.92L44.55 7a5.08 5.08.0 012.57 1.6A3.76 3.76.0 0147.9 11a4.21 4.21.0 01-.44 1.93 4.4 4.4.0 01-1.21 1.47 5.43 5.43.0 01-1.85.93A8.25 8.25.0 0142.05 15.62z"/><path class="cls-2" d="M45.19 23.81C39.72 27.85 31.78 30 25 30A36.64 36.64.0 01.22 20.57c-.51-.46-.06-1.09.56-.74A49.78 49.78.0 0025.53 26.4 49.23 49.23.0 0044.4 22.53C45.32 22.14 46.1 23.14 45.19 23.81z"/><path class="cls-2" d="M47.47 21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74 3.13-2.2 8.27-1.57 8.86-.83s-.16 5.89-3.09 8.35c-.45.38-.88.18-.68-.32C46.69 25.8 48.17 22.11 47.47 21.21z"/></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=../../../js/lunr.min.js?1765542844></script><script type=text/javascript src=../../../js/auto-complete.js?1765542844></script><script type=text/javascript>var baseurl="https://thanhquanba.github.io/fcj-report//vi"</script><script type=text/javascript src=../../../js/search.js?1765542844></script></div><div class=highlightable><ul class=topics><li data-nav-id=/vi/1-worklog/ title="Nhật ký công việc" class=dd-item><a href=../../../vi/1-worklog/><b>1. </b>Nhật ký công việc
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/1-worklog/1.1-week1/ title="Worklog Tuần 1" class=dd-item><a href=../../../vi/1-worklog/1.1-week1/><b>1.1. </b>Worklog Tuần 1
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.2-week2/ title="Worklog Tuần 2" class=dd-item><a href=../../../vi/1-worklog/1.2-week2/><b>1.2. </b>Worklog Tuần 2
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.3-week3/ title="Worklog Tuần 3" class=dd-item><a href=../../../vi/1-worklog/1.3-week3/><b>1.3. </b>Worklog Tuần 3
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.4-week4/ title="Worklog Tuần 4" class=dd-item><a href=../../../vi/1-worklog/1.4-week4/><b>1.4. </b>Worklog Tuần 4
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.5-week5/ title="Worklog Tuần 5" class=dd-item><a href=../../../vi/1-worklog/1.5-week5/><b>1.5. </b>Worklog Tuần 5
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.6-week6/ title="Worklog Tuần 6" class=dd-item><a href=../../../vi/1-worklog/1.6-week6/><b>1.6. </b>Worklog Tuần 6
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.7-week7/ title="Worklog Tuần 7" class=dd-item><a href=../../../vi/1-worklog/1.7-week7/><b>1.7. </b>Worklog Tuần 7
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.8-week8/ title="Worklog Tuần 8" class=dd-item><a href=../../../vi/1-worklog/1.8-week8/><b>1.8. </b>Worklog Tuần 8
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.9-week9/ title="Worklog Tuần 9" class=dd-item><a href=../../../vi/1-worklog/1.9-week9/><b>1.9. </b>Worklog Tuần 9
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.10-week10/ title="Worklog Tuần 10" class=dd-item><a href=../../../vi/1-worklog/1.10-week10/><b>1.10. </b>Worklog Tuần 10
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.11-week11/ title="Worklog Tuần 11" class=dd-item><a href=../../../vi/1-worklog/1.11-week11/><b>1.11. </b>Worklog Tuần 11
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.12-week12/ title="Worklog Tuần 12" class=dd-item><a href=../../../vi/1-worklog/1.12-week12/><b>1.12. </b>Worklog Tuần 12
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/2-proposal/ title="Bản đề xuất" class=dd-item><a href=../../../vi/2-proposal/><b>2. </b>Bản đề xuất
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/3-blogstranslated/ title="Các bài blogs đã dịch" class="dd-item
+parent"><a href=../../../vi/3-blogstranslated/><b>3. </b>Các bài blogs đã dịch
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/3-blogstranslated/3.1-blog1/ title="Blog 1" class=dd-item><a href=../../../vi/3-blogstranslated/3.1-blog1/><b>3.1. </b>Blog 1
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/3-blogstranslated/3.2-blog2/ title="Blog 2" class=dd-item><a href=../../../vi/3-blogstranslated/3.2-blog2/><b>3.1. </b>Blog 2
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/3-blogstranslated/3.3-blog3/ title="Blog 3" class="dd-item
+active"><a href=../../../vi/3-blogstranslated/3.3-blog3/><b>3.1. </b>Blog 3
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/4-eventparticipated/ title="Các events đã tham gia" class=dd-item><a href=../../../vi/4-eventparticipated/><b>4. </b>Các events đã tham gia
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/4-eventparticipated/4.1-event1/ title="Sự kiện 1" class=dd-item><a href=../../../vi/4-eventparticipated/4.1-event1/><b>4.1. </b>Sự kiện 1
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/4-eventparticipated/4.2-event2/ title="Sự kiện 2" class=dd-item><a href=../../../vi/4-eventparticipated/4.2-event2/><b>4.2. </b>Sự kiện 2
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/4-eventparticipated/4.3-event3/ title="Sự kiện 3" class=dd-item><a href=../../../vi/4-eventparticipated/4.3-event3/><b>4.3 </b>Sự kiện 3
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/5-workshop/ title=Workshop class=dd-item><a href=../../../vi/5-workshop/><b>5. </b>Workshop
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/5-workshop/5.1-workshop-overview/ title="Giới thiệu" class=dd-item><a href=../../../vi/5-workshop/5.1-workshop-overview/><b>5.1. </b>Giới thiệu
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.2-prerequiste/ title="Điều kiện tiên quyết" class=dd-item><a href=../../../vi/5-workshop/5.2-prerequiste/><b>5.2. </b>Điều kiện tiên quyết
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.3-vpc-subnet/ title="Tạo VPC & Subnets" class=dd-item><a href=../../../vi/5-workshop/5.3-vpc-subnet/><b>5.3. </b>Tạo VPC & Subnets
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.4-nat/ title="Tạo NAT Gateway" class=dd-item><a href=../../../vi/5-workshop/5.4-nat/><b>5.4. </b>Tạo NAT Gateway
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.5-ec2/ title="Khởi chạy EC2 Instances" class=dd-item><a href=../../../vi/5-workshop/5.5-ec2/><b>5.5. </b>Khởi chạy EC2 Instances
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.6-cleanup/ title="Dọn dẹp tài nguyên" class=dd-item><a href=../../../vi/5-workshop/5.6-cleanup/><b>5.6. </b>Dọn dẹp tài nguyên
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/6-self-evaluation/ title="Tự đánh giá" class=dd-item><a href=../../../vi/6-self-evaluation/><b>6. </b>Tự đánh giá
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/7-feedback/ title="Chia sẻ, đóng góp ý kiến" class=dd-item><a href=../../../vi/7-feedback/><b>7. </b>Chia sẻ, đóng góp ý kiến
+<i class="fas fa-check read-icon"></i></a></li></ul><section id=shortcuts><h3>More</h3><ul><li><a class=padding href=https://www.facebook.com/groups/awsstudygroupfcj/><i class='fab fa-facebook'></i> AWS Study Group</a></li></ul></section><section id=prefooter><hr><ul><li><a class=padding><i class="fas fa-language fa-fw"></i><div class=select-style><select id=select-language onchange="location=this.value"><option id=en value=https://thanhquanba.github.io/fcj-report/3-blogstranslated/3.3-blog3/>English</option><option id=vi value=https://thanhquanba.github.io/fcj-report/vi/3-blogstranslated/3.3-blog3/ selected>Tiếng Việt</option></select><svg id="Capa_1" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg></div></a></li><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer><left><b>Workshop</b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title=Migrate alt="web counter" border=0></a><br><b><a href=https://cloudjourney.awsstudygroup.com/>Cloud Journey</a></b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" alt="web counter" border=0>
+</left><left><br><br><b>Last Updated</b><br><i><span id=lastUpdated style=color:orange></span>
+</i><script>const today=new Date,formattedDate=today.toLocaleDateString("en-GB");document.getElementById("lastUpdated").textContent=formattedDate</script></left><left><br><br><b>Team</b><br><i><a href=https://www.facebook.com/groups/660548818043427 style=color:orange>First Cloud Journey</a><br></i></left><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i>
+</a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links><a href=../../../vi/>Báo cáo thực tập</a> > <a href=../../../vi/3-blogstranslated/>Các bài blogs đã dịch</a> > Blog 3</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><a href=#tổng-quan-về-giải-pháp><strong>Tổng quan về giải pháp</strong></a></li><li><a href=#vector-hóa-dữ-liệu><strong>Vector hóa dữ liệu</strong></a></li><li><a href=#phân-loại-dữ-liệu><strong>Phân loại dữ liệu</strong></a></li><li><a href=#thu-thập-và-lập-chỉ-mục-dữ-liệu-được-phân-loại><strong>Thu thập và lập chỉ mục dữ liệu được phân loại</strong></a></li><li><a href=#truy-vấn-cơ-sở-dữ-liệu><strong>Truy vấn cơ sở dữ liệu</strong></a></li><li><a href=#tối-ưu-hóa-cho-các-lô-truy-vấn-lớn><strong>Tối ưu hóa cho các lô truy vấn lớn</strong></a></li><li><a href=#kết-quả-đánh-giá-chuẩn><strong>Kết quả đánh giá chuẩn</strong></a></li><li><a href=#phần-kết-luận><strong>Phần kết luận</strong></a><ul><li><a href=#về-các-tác-giả><strong>Về các tác giả</strong></a></li><li><a href=#audra-devoto><strong>Audra Devoto</strong></a></li><li><a href=#heading></a></li><li><a href=#christopher-brown><strong>Christopher Brown</strong></a></li><li><a href=#heading-1></a></li><li><a href=#patrick-oconnor><strong>Patrick O&rsquo;Connor</strong></a></li><li><a href=#heading-2></a></li><li><a href=#owen-janson><strong>Owen Janson</strong></a></li><li><a href=#heading-3></a></li><li><a href=#pavel-novichkov><strong>Pavel Novichkov</strong></a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Blog 3</h1><h1 id=giải-pháp-tìm-kiếm-và-cơ-sở-dữ-liệu-có-khả-năng-mở-rộng-đàn-hồi-cho-hơn-1-tỷ-vectơ-được-xây-dựng-trên-lancedb-và-amazon-s3>Giải pháp tìm kiếm và cơ sở dữ liệu có khả năng mở rộng, đàn hồi cho hơn 1 tỷ vectơ được xây dựng trên LanceDB và Amazon S3</h1><p>bởi Audra Devoto, Christopher Brown, Patrick O&rsquo;Connor, Owen Janson và Pavel Novichkov trên22 THÁNG 9 NĂM 2025 trong <a href=https://aws.amazon.com/blogs/architecture/category/learning-levels/advanced-300/>Nâng cao (300)</a> , <a href=https://aws.amazon.com/blogs/architecture/category/storage/amazon-simple-storage-services-s3/>Dịch vụ lưu trữ đơn giản của Amazon (S3)</a> , <a href=https://aws.amazon.com/blogs/architecture/category/compute/aws-batch/>AWS Batch</a> , <a href=https://aws.amazon.com/blogs/architecture/category/compute/aws-lambda/>AWS Lambda</a> , <a href=https://aws.amazon.com/blogs/architecture/category/application-services/aws-step-functions/>Chức năng bước AWS</a> , <a href=https://aws.amazon.com/blogs/architecture/category/post-types/customer-solutions/>Giải pháp khách hàng</a> , <a href=https://aws.amazon.com/blogs/architecture/category/enterprise-strategy/innovation-and-reinvention/>Đổi mới và tái tạo</a> , <a href=https://aws.amazon.com/blogs/architecture/category/industries/life-sciences/>Khoa học đời sống</a> , <a href=https://aws.amazon.com/blogs/architecture/category/serverless/>Không máy chủ</a> , <a href=https://aws.amazon.com/blogs/architecture/category/startup/>Khởi</a> nghiệp , <a href=https://aws.amazon.com/blogs/architecture/category/post-types/technical-how-to/>Hướng dẫn kỹ thuật Liên kết</a> <a href=https://aws.amazon.com/blogs/architecture/a-scalable-elastic-database-and-search-solution-for-1b-vectors-built-on-lancedb-and-amazon-s3/>cố định</a> <a href=https://aws.amazon.com/blogs/architecture/a-scalable-elastic-database-and-search-solution-for-1b-vectors-built-on-lancedb-and-amazon-s3/#Comments>Bình luận</a> <a href=https://aws.amazon.com/vi/blogs/architecture/a-scalable-elastic-database-and-search-solution-for-1b-vectors-built-on-lancedb-and-amazon-s3/>Chia sẻ</a></p><p><em>Bài viết này được đồng sáng tác với Owen Janson, Audra Devoto và Christopher Brown của Metagenomi.</em></p><p>Từ chỉnh sửa gen <a href=https://innovativegenomics.org/what-is-crispr/>CRISPR</a> đến xúc tác sinh học công nghiệp, enzyme cung cấp năng lượng cho một số công nghệ mang tính đột phá nhất trong chăm sóc sức khỏe, năng lượng và sản xuất. Tuy nhiên, việc phát hiện ra các enzyme mới có khả năng chuyển đổi cả một ngành công nghiệp — chẳng hạn như Cas9 cho kỹ thuật di truyền gen — đòi hỏi phải sàng lọc hàng tỷ enzyme đa dạng được mã hóa bởi các sinh vật trải dài trên cây sự sống. Những tiến bộ trong giải trình tự DNA và metagenomics đã cho phép phát triển các cơ sở dữ liệu công cộng và độc quyền khổng lồ chứa các trình tự protein đã biết, nhưng việc rà soát các bộ sưu tập này để xác định các ứng cử viên có giá trị cao về cơ bản là một vấn đề về dữ liệu lớn cũng như sinh học.</p><p>Tại <a href=https://metagenomi.co/>Metagenomi</a> , chúng tôi đang phát triển các liệu pháp có tiềm năng chữa bệnh bằng cách sử dụng cơ sở dữ liệu metagenomics (MGXdb) rộng lớn của mình để xây dựng một bộ công cụ gồm các hệ thống chỉnh sửa gen mới. Trong bài viết này, chúng tôi sẽ nêu bật cách Metagenomi giải quyết thách thức khám phá enzyme ở quy mô hàng tỷ protein bằng cách sử dụng cơ sở hạ tầng có khả năng mở rộng của <a href=https://aws.amazon.com/aws/>Amazon Web Services</a> (AWS) để xây dựng cơ sở dữ liệu protein hiệu suất cao và giải pháp tìm kiếm dựa trên nhúng. Bằng cách nhúng mọi protein trong cơ sở dữ liệu độc quyền lớn của chúng tôi vào một không gian vector, cho phép dữ liệu có thể truy cập bằng <a href=https://lancedb.github.io/lancedb/>LanceDB</a> được xây dựng trên <a href=https://aws.amazon.com/s3/>Amazon Simple Storage Service</a> (Amazon S3) và được truy cập bằng <a href=https://aws.amazon.com/lambda/>AWS Lambda</a> , chúng tôi đã có thể biến việc khám phá enzyme thành bài toán tìm kiếm lân cận gần nhất và nhanh chóng tiếp cận không gian khám phá chưa được khám phá trước đây.</p><h2 id=tổng-quan-về-giải-pháp><strong>Tổng quan về giải pháp</strong></h2><p>Cốt lõi của giải pháp của chúng tôi là LanceDB. LanceDB là một cơ sở dữ liệu vector nguồn mở cho phép tìm kiếm xấp xỉ lân cận gần nhất (ANN) nhanh chóng trên các vector được lập chỉ mục. LanceDB đặc biệt phù hợp với ngăn xếp không máy chủ vì nó hoàn toàn dựa trên tệp và cũng tương thích với lưu trữ Amazon S3. Do đó, chúng tôi có thể lưu trữ cơ sở dữ liệu trình tự protein nhúng trên Amazon S3 với chi phí tương đối thấp, thay vì lưu trữ đĩa cố định như <a href=https://aws.amazon.com/ebs/>Amazon Elastic Block Store</a> (Amazon EBS). Thay vì máy chủ chạy liên tục, tất cả những gì cần thiết để truy vấn cơ sở dữ liệu theo yêu cầu nhanh chóng là một hàm Lambda sử dụng LanceDB để tìm lân cận gần nhất trực tiếp từ dữ liệu trên S3.</p><p>Để vượt qua thách thức trong việc thu thập và truy vấn hàng tỷ vector nhúng đại diện cho cơ sở dữ liệu protein lớn của Metagenomi, chúng tôi đã thiết kế một phương pháp chia cơ sở dữ liệu thành các phần có kích thước bằng nhau (thư mục) được lưu trữ với chi phí thấp trên Amazon S3, có thể được lập chỉ mục song song và tìm kiếm bằng phương pháp map-reduce sử dụng Lambda. Sơ đồ sau minh họa kiến ​​trúc này.</p><p>![Kiến trúc AWS hiển thị quy trình xử lý vectơ protein với ECR, Lambda và LanceDB]<img alt="alt text" src=https://d2908q01vomqb2.cloudfront.net/fc074d501302eb2b93e2554793fcaf50b3bf7291/2025/08/28/lance-arch-prototype.png>]</p><p>Quá trình này diễn ra theo bốn bước:</p><ol><li><p>Vector hóa dữ liệu</p></li><li><p>Phân loại dữ liệu</p></li><li><p>Lập chỉ mục và thu thập dữ liệu</p></li><li><p>Truy vấn cơ sở dữ liệu</p></li></ol><h2 id=vector-hóa-dữ-liệu><strong>Vector hóa dữ liệu</strong></h2><p>Để sử dụng khả năng tìm kiếm ANN nhanh của LanceDB, dữ liệu phải ở dạng vector. Cơ sở dữ liệu metagenomics của chúng tôi bao gồm hàng tỷ protein, mỗi protein là một chuỗi axit amin. Để chuyển đổi mỗi protein thành một vector nắm bắt thông tin có ý nghĩa sinh học, chúng tôi chạy chúng qua một mô hình ngôn ngữ protein (pLM), nắm bắt các lớp ẩn của mô hình như một biểu diễn vector của protein đó. Nhiều pLM có thể được sử dụng để tạo nhúng protein, tùy thuộc vào thông tin sinh học mong muốn và các yêu cầu tính toán. Ở đây, chúng tôi sử dụng <a href=https://github.com/chandar-lab/AMPLIFY>mô hình AMPLIFY_350M</a> , một mô hình mã hóa biến áp đủ nhanh để mở rộng quy mô cho toàn bộ cơ sở dữ liệu protein của chúng tôi. Chúng tôi thực hiện một nhóm trung bình của lớp ẩn cuối cùng của mô hình để tạo ra một vector 960 chiều cho mỗi protein. Các vector này và ID protein duy nhất tương ứng của chúng sau đó được lưu trữ trong các tệp HDF5.</p><h2 id=phân-loại-dữ-liệu><strong>Phân loại dữ liệu</strong></h2><p>Để chuyển đổi các vectơ protein thành cơ sở dữ liệu có thể tìm kiếm, chúng tôi sử dụng LanceDB để xây dựng một chỉ mục phù hợp cho việc nhanh chóng tìm kiếm các mạng nơ-ron nhân tạo (ANN) cho một truy vấn. Tuy nhiên, việc lập chỉ mục có thể mất nhiều thời gian và khó phân bổ trên các nút. Để tăng tốc độ lập chỉ mục, trước tiên chúng tôi chia dữ liệu thành các nhóm có kích thước gần bằng nhau. Sau đó, chúng tôi gán mỗi tệp HDF5 nhúng vào các nhóm có kích thước xấp xỉ bằng 200 triệu vectơ tổng cộng bằng thuật toán đóng gói bin phù hợp nhất. Phương pháp đóng gói kích thước chính xác được sử dụng để đóng gói dữ liệu phụ thuộc vào số lượng và kích thước của các vectơ, cũng như định dạng của chúng. Mỗi nhóm được nhập vào một bảng riêng biệt, bảng này sẽ nằm riêng trong một kho lưu trữ đối tượng cơ sở dữ liệu LanceDB duy nhất trên Amazon S3.</p><p>![Cấu trúc thùng S3 hiển thị tổ chức cơ sở dữ liệu LanceDB với các thùng vector]<img alt="alt text" src=https://d2908q01vomqb2.cloudfront.net/fc074d501302eb2b93e2554793fcaf50b3bf7291/2025/08/28/lance-bucket-breakdown.png>]</p><p>Bằng cách phân nhóm dữ liệu, chúng ta có thể tạo ra nhiều cơ sở dữ liệu nhỏ hơn, có thể được lập chỉ mục trên các nút riêng biệt trong thời gian ngắn hơn nhiều. Chúng ta cũng có thể thêm dữ liệu vào cơ sở dữ liệu theo từng bước dưới dạng một nhóm mới, thay vì phải lập chỉ mục lại toàn bộ dữ liệu hiện có.</p><h2 id=thu-thập-và-lập-chỉ-mục-dữ-liệu-được-phân-loại><strong>Thu thập và lập chỉ mục dữ liệu được phân loại</strong></h2><p>Sau khi dữ liệu vector hóa đã được gán vào một bucket, đã đến lúc chuyển đổi nó thành một bảng LanceDB và lập chỉ mục để cho phép truy vấn ANN nhanh chóng. Chi tiết về cách chuyển đổi dữ liệu cụ thể của bạn thành bảng LanceDB có thể được tìm thấy trong <a href=https://lancedb.github.io/lancedb/>tài liệu LanceDB</a> . Đối với mỗi bucket của chúng tôi, với khoảng 200 triệu vector, chúng tôi tạo một bảng LanceDB với chỉ mục IVF-PQ theo khoảng cách cosin. Để lập chỉ mục, chúng tôi sử dụng một số phân vùng bằng căn bậc hai của số hàng được chèn và một số vector con bằng số chiều của các vector chia cho 16.</p><p>Để việc truy vấn trở nên dễ dàng hơn, chúng tôi đặt tên cho mỗi bảng theo tên thùng mà bảng được tạo ra và tải chúng lên một thư mục S3 duy nhất sao cho cấu trúc tệp của chúng chỉ ra một cơ sở dữ liệu LanceDB duy nhất với nhiều bảng.</p><p>Đoạn mã sau đây cung cấp một ví dụ về cách bạn có thể nhập các vectơ từ tệp HDF5 chứa các cột idvà embeddingvào cơ sở dữ liệu LanceDB và lập chỉ mục để tìm kiếm ANN nhanh dựa trên khoảng cách cosin. Yêu cầu duy nhất để chạy đoạn mã này là python >= 3.9, cũng như các gói lancedb, pyarrow, và h5py. Cần lưu ý rằng đoạn mã này đã được thử nghiệm và phát triển bằng cách sử dụng lancedbphiên bản 0.21.1sử dụng API LanceDB không đồng bộ.</p><p>from typing import List, Iterable</p><p>from itertools import islice</p><p>from math import sqrt</p><p>import pyarrow as pa</p><p>import datetime</p><p>import asyncio</p><p>import lancedb</p><p>import h5py</p><p>def batched(iterable: Iterable, n: int) -> Iterable[List]:</p><pre><code>&quot;&quot;&quot;Yield batches of n items from iterable.&quot;&quot;&quot;
+
+while batch := list(islice(iterable, n)):
+
+    yield batch
+</code></pre><p>async def vectors_to_db(</p><pre><code>vectors: str,
+
+db: str,
+
+table\_name: str,
+
+vector\_dim: int,
+
+ingestion\_batch\_size: int,
+</code></pre><p>) -> int:</p><pre><code>&quot;&quot;&quot;Ingest and index vectors from an HDF5 file into a LanceDB table.
+
+Args:
+
+    vectors (str): An HDF5 file containing protein IDs and their
+
+        960-dimension vector representations.
+
+    db (str): Path to the LanceDB database.
+
+    table\_name (str): Name of the table to create.
+
+    vector\_dim (int): Dimension of the vectors.
+
+&quot;&quot;&quot;
+
+\# create db and table
+
+custom\_schema \= pa.schema(
+
+    \[
+
+        pa.field(&quot;embedding&quot;, pa.list\_(pa.float32(), vector\_dim)),
+
+        pa.field(&quot;id&quot;, pa.string()),
+
+    \]
+
+)
+
+\# count the total number of rows as they are added to the table
+
+total\_rows \= 0
+
+\# open a connection to the new database and create a table
+
+with await lancedb.connect\_async(db) as db\_connection:
+
+    with await db\_connection.create\_table(
+
+        table\_name, schema\=custom\_schema
+
+    ) as table\_connection:
+
+        \# open vectors file
+
+        with h5py.File(vectors, &quot;r&quot;) as vectors\_handle:
+
+            \# create a generator over the rows
+
+            rows \= (
+
+                {&quot;embedding&quot;: e, &quot;id&quot;: i}
+
+                for e, i in zip(
+
+                    vectors\_handle\[&quot;embedding&quot;\],
+
+                    vectors\_handle\[&quot;id&quot;\],
+
+                )
+
+            )
+
+            \# insert rows in batches to avoid memory issues
+
+            for batch in batched(rows, ingestion\_batch\_size):
+
+                total\_rows \+= len(batch)
+
+                await table\_connection.add(batch)
+
+        \# optimize the table and remove old data
+
+        await table\_connection.optimize(
+
+            cleanup\_older\_than\=datetime.timedelta(days\=0)
+
+        )
+
+        \# configure the index for the table
+
+        index\_config \= lancedb.index.IvfPq(
+
+            distance\_type\=&quot;cosine&quot;,
+
+            num\_partitions\=int(sqrt(total\_rows)),
+
+            num\_sub\_vectors\=int(
+
+                vector\_dim / 16
+
+            ),
+
+        )
+
+        \# index the table
+
+        await table\_connection.create\_index(
+
+            &quot;embedding&quot;, config\=index\_config
+
+        )
+</code></pre><p># ingest and index your data</p><p>asyncio.run(</p><pre><code>vectors\_to\_db(
+
+    vectors\=&quot;./my\_vectors.h5&quot;,
+
+    db\=&quot;./test\_db&quot;,
+
+    table\_name\=&quot;bucket1&quot;,
+
+    vector\_dim\=960,
+
+    ingestion\_batch\_size\=50000
+
+)
+</code></pre><p>)</p><p>Nhiệm vụ vector hóa, thu thập, lập chỉ mục cho từng thùng có thể được thực hiện song song trên nhiều tác vụ <a href=https://aws.amazon.com/batch/>AWS Batch</a> hoặc chạy trên một phiên bản <a href=https://aws.amazon.com/ec2/>Amazon Elastic Compute Cloud</a> (Amazon EC2) duy nhất.</p><h2 id=truy-vấn-cơ-sở-dữ-liệu><strong>Truy vấn cơ sở dữ liệu</strong></h2><p>Sau khi dữ liệu được phân nhóm và nhập vào cơ sở dữ liệu LanceDB trên Amazon S3, chúng ta cần một cách để truy vấn dữ liệu. Vì LanceDB có thể được truy vấn trực tiếp từ Amazon S3 bằng API Python của LanceDB, chúng ta có thể sử dụng các hàm Lambda để lấy một vectơ truy vấn do người dùng cung cấp và tìm kiếm các mạng nơ-ron nhân tạo (ANN), sau đó trả về dữ liệu cho người dùng. Tuy nhiên, vì dữ liệu của chúng ta đã được phân nhóm trên nhiều bảng trong cơ sở dữ liệu, chúng ta cần tìm kiếm các lân cận gần nhất trong mỗi nhóm và tổng hợp kết quả trước khi trả về cho người dùng.</p><p>Chúng tôi triển khai quy trình truy vấn dưới dạng <a href=https://docs.aws.amazon.com/step-functions/latest/dg/concepts-statemachines.html>máy trạng thái</a> <a href=https://aws.amazon.com/step-functions/>AWS Step Functions</a> , quản lý quy trình truy vấn cho mỗi bucket dưới dạng quy trình Lambda, cũng như một quy trình Lambda duy nhất ở cuối quy trình, tổng hợp dữ liệu và ghi các ANN kết quả vào tệp .csv trên Amazon S3. Tuy nhiên, quy trình này cũng có thể được triển khai dưới dạng một loạt quy trình AWS Batch hoặc thậm chí chạy cục bộ. Đoạn mã sau đây cho thấy cách một quy trình được gán cho một bucket có thể chạy truy vấn ANN trên một trong các bucket của cơ sở dữ liệu, chỉ yêu cầu và chạy trên . Như đã trình bày chi tiết trước đó trong phần thu thập dữ liệu, chúng tôi sử dụng API LanceDB không đồng bộ và phiên bản gói .pandaslancedbpython >= 3.9lancedb0.21.1</p><p>from typing import List, Iterable</p><p>import asyncio</p><p>import lancedb</p><p>import pandas</p><p>import random</p><p>async def run_query_async(</p><pre><code>lancedb\_s3\_uri: str,
+
+table\_name: str,
+
+q\_vec: List\[float\],
+
+k: int,
+
+vec\_col: str,
+
+n\_probes: int,
+
+refine\_factor: int,
+</code></pre><p>) -> pandas.DataFrame:</p><pre><code>&quot;&quot;&quot;Run a query on a LanceDB table.
+
+Args:
+
+    lancedb\_s3\_uri (str): S3 URI of the LanceDB database.
+
+    table\_name (str): Name of the table to query.
+
+    q\_vec (List\[float\]): Query vector.
+
+    k (int): Number of nearest neighbors to return.
+
+    vec\_col (str): Column name of the vector column.
+
+    n\_probes (int): Number of probes to use for the query.
+
+    refine\_factor (int): Refine factor for the query.
+
+Returns:
+
+    pandas.DataFrame: DataFrame containing the approximate nearest
+
+    neighbors to the query vector.
+
+&quot;&quot;&quot;
+
+\# open a connection to the database and table
+
+with await lancedb.connect\_async(
+
+    lancedb\_s3\_uri, storage\_options\={&quot;timeout&quot;: &quot;120s&quot;}
+
+) as db\_connection:
+
+    with await db\_connection.open\_table(table\_name) as table\_connection:
+
+        \# query the approximate nearest neighbors to the query vector
+
+        df \= (
+
+            await table\_connection.query()
+
+            .nearest\_to(q\_vec)
+
+            .column(vec\_col)
+
+            .nprobes(n\_probes)
+
+            .refine\_factor(refine\_factor)
+
+            .limit(k)
+
+            .distance\_type(&quot;cosine&quot;)
+
+            .to\_pandas()
+
+        )
+
+return df
+</code></pre><p># query the example bucket we produced in the last section</p><p>bucket1_df = asyncio.run(</p><pre><code>snippets.run\_query\_async(
+
+    lancedb\_s3\_uri\=&quot;s3://mg-analysis/owen/20250415\_lancedb\_snippet\_testing/test\_db/&quot;,
+
+    table\_name\=&quot;bucket1&quot;,
+
+    q\_vec\=\[random.random() for \_ in range(960)\],
+
+    k\=3,
+
+    vec\_col\=&quot;embedding&quot;,
+
+    n\_probes\=1,
+
+    refine\_factor\=1,
+
+)
+</code></pre><p>)</p><p>Truy vấn trước đó sẽ trả về một panda DataFrame có cấu trúc sau:</p><table><thead><tr><th style=text-align:left>nhúng</th><th style=text-align:left>nhận dạng</th><th style=text-align:left>_khoảng cách</th></tr></thead><tbody><tr><td style=text-align:left>[-5.124435, 4.242000, …]</td><td style=text-align:left>id_1</td><td style=text-align:left>0,000000</td></tr><tr><td style=text-align:left>[-5,783999, 4,340500, …]</td><td style=text-align:left>id_2</td><td style=text-align:left>0,001000</td></tr><tr><td style=text-align:left>[-6,932943, 3,394850, …]</td><td style=text-align:left>id_3</td><td style=text-align:left>0,04020</td></tr></tbody></table><p>Trong đó, embeddingcột chứa biểu diễn vectơ của các láng giềng gần nhất, idcột chứa ID của chúng và _distancecột chứa khoảng cách cosin của chúng đến vectơ được truy vấn.</p><p>Sau khi mỗi bucket được truy vấn độc lập trên các nút và mỗi bucket trả về một DataFrame lân cận gần nhất, kết quả phải được hợp nhất và tập hợp lại để trả về người dùng. Đoạn mã sau đây cho thấy cách bạn có thể thực hiện việc này.</p><p>def aggregate_nearest_neighbors(</p><pre><code>dfs: List\[pandas.DataFrame\], k: int
+</code></pre><p>):</p><pre><code>&quot;&quot;&quot;Aggregate the nearest neighbors for each query vector.
+
+Args:
+
+    dfs (List\[pandas.DataFrame\]): A list of DataFrames containing the
+
+        nearest neighbors queried from each bucket.
+
+    k (int): The number of nearest neighbors to aggregate.
+
+Returns:
+
+    pd.DataFrame: A DataFrame with the aggregated nearest neighbors.
+
+&quot;&quot;&quot;
+
+\# concatenate the DataFrames and get the top k nearest neighbors
+
+return (
+
+    pandas.concat(dfs, ignore\_index\=True)
+
+    .sort\_values(by\=\[&quot;\_distance&quot;\], ascending\=True)
+
+    .reset\_index(drop\=True)
+
+    .head(k)
+
+)
+</code></pre><p># add the dataframes from querying each bucket to a list</p><p>dfs = [bucket1_df, bucket2_df, bucket3_df, bucket4_df, bucket_5]</p><p># aggregate the nearest neighbors across all buckets</p><p>nearest_neighbors_all_buckets_df = aggregate_nearest_neighbors(dfs, 5)</p><h2 id=tối-ưu-hóa-cho-các-lô-truy-vấn-lớn><strong>Tối ưu hóa cho các lô truy vấn lớn</strong></h2><p>Mặc dù truy vấn cơ sở dữ liệu LanceDB trực tiếp từ kho đối tượng S3 trên Lambda hoạt động tốt khi truy vấn ANN của một hoặc một vài vectơ truy vấn, một số trường hợp sử dụng có thể yêu cầu truy vấn hàng nghìn hoặc thậm chí hàng triệu vectơ.</p><p>Một giải pháp chúng tôi tìm thấy có khả năng mở rộng tốt với các lô truy vấn lớn là sửa đổi triển khai truy vấn trước đó sao cho trước tiên tải xuống một trong các thùng cơ sở dữ liệu vào bộ nhớ cục bộ, sau đó truy vấn cục bộ bằng API LanceDB. Vì các thùng cơ sở dữ liệu có thể có dấu chân lưu trữ lớn, nên triển khai này phù hợp hơn với các tác vụ AWS Batch so với Lambda và chúng tôi khuyên bạn nên sử dụng bộ nhớ phiên bản được tối ưu hóa (ví dụ: phiên bản i4i) thay vì ổ đĩa EBS. Sau khi tất cả các tác vụ Batch truy vấn hoàn tất, một tác vụ cuối cùng có thể tổng hợp kết quả của chúng trước khi trả về cho người dùng. Việc phối hợp các tác vụ truy vấn song song và tác vụ tổng hợp có thể được thực hiện bằng <a href=https://www.nextflow.io/docs/latest/index.html>Nextflow</a> . Mặc dù triển khai này sẽ có chi phí và độ trễ cao hơn đáng kể khi tải các thùng xuống đĩa, nhưng nó có thể xử lý các lô truy vấn lớn hơn một cách hiệu quả hơn và vẫn không yêu cầu cơ sở dữ liệu chạy liên tục trên máy chủ.</p><h2 id=kết-quả-đánh-giá-chuẩn><strong>Kết quả đánh giá chuẩn</strong></h2><p>Chiến lược lập chỉ mục và kích thước phân chia cơ sở dữ liệu phụ thuộc vào nhu cầu hiệu suất cá nhân của bạn. Hãy cân nhắc hướng dẫn tối ưu hóa chung sau đây khi tùy chỉnh theo trường hợp sử dụng của bạn.</p><p>Một cơ sở dữ liệu mẫu do Metagenomi tạo ra bao gồm 3,5 tỷ vector nhúng được tạo bởi AMPLIFY, với kích thước 960. Việc tiếp nhận và lập chỉ mục 3,5 tỷ vector nhúng này thành các kích thước chia nhỏ, mỗi vector 200 triệu trên i4i.8xlargecác phiên bản, mất tổng cộng 108 giờ tính toán. Vì giải pháp này không cần máy chủ và có thể được truy vấn trực tiếp từ kho đối tượng S3, nên chi phí cố định duy nhất của cơ sở dữ liệu này là dung lượng lưu trữ trên Amazon S3 (đối với cơ sở dữ liệu được lập chỉ mục gồm 3,5 tỷ vector, chi phí này là khoảng 12,9 TB). Truy vấn Lambda có thể là một giải pháp truy vấn có chi phí cực kỳ thấp, với nhiều truy vấn chỉ tốn vài phần trăm.</p><p>Nhìn chung, việc phân chia cơ sở dữ liệu lớn hơn sẽ tiết kiệm chi phí truy vấn hơn nhưng sẽ dẫn đến thời gian chạy và thời gian lập chỉ mục dài hơn. Chúng tôi khuyến nghị tăng quy mô phân chia cơ sở dữ liệu lên kích thước tối đa để đạt được thời gian trả về truy vấn chấp nhận được cho một lần phân chia duy nhất, đồng thời cân nhắc các giới hạn song song hóa, chẳng hạn như số lượng hàm Lambda đồng thời tối đa đang chạy. Metagenomi đã xác định các phân chia cơ sở dữ liệu với 200 triệu vectơ mỗi lần để mang lại sự cân bằng tối ưu về chi phí và thời gian chạy cho cả truy vấn nhỏ và lớn. Chúng tôi khuyến nghị sử dụng và lập chỉ mục trên các phiên bản được tối ưu hóa lưu trữ, chẳng hạn như các phiên bản thuộc họ i4i, để đạt hiệu suất và tiết kiệm chi phí tối ưu. Nếu truy vấn được thực hiện trên một phiên bản sử dụng cơ sở dữ liệu dựa trên đĩa (khác với Lambda và Amazon S3), chúng tôi cũng khuyến nghị sử dụng các phiên bản được tối ưu hóa lưu trữ cho các truy vấn. Chúng tôi nhận thấy việc triển khai Lambda có thể nhanh chóng xử lý các truy vấn đơn lẻ yêu cầu tối đa 50.000 ANN hoặc nhiều truy vấn lên đến 100 chuỗi với ít hơn 5 ANN. Thời gian chạy tăng tuyến tính theo số lượng ANN được yêu cầu, như được hiển thị trong biểu đồ sau.</p><p>![Biểu đồ đường cho thấy thời gian chạy truy vấn tăng dần theo số lượng hàng xóm gần nhất]<img alt="alt text" src=https://d2908q01vomqb2.cloudfront.net/fc074d501302eb2b93e2554793fcaf50b3bf7291/2025/08/28/metrics-graph-lance.png>]</p><h2 id=phần-kết-luận><strong>Phần kết luận</strong></h2><p>Trong bài viết này, chúng tôi đã trình bày cách Metagenomi có thể lưu trữ và truy vấn hàng tỷ protein nhúng với chi phí thấp bằng cách sử dụng LanceDB được triển khai với Amazon S3 và AWS Lambda. Công trình này mở rộng sứ mệnh hướng đến bệnh nhân của Metagenomi là tạo ra các loại thuốc di truyền chữa bệnh bằng cách đẩy nhanh nền tảng khám phá và kỹ thuật của chúng tôi. Việc truy cập nhanh vào không gian nhúng ANN của một protein truy vấn trong vài giây đã cho phép tích hợp các phương pháp tìm kiếm nhanh vào các quy trình phân tích mở rộng của chúng tôi, đẩy nhanh việc khám phá một số họ enzyme đa dạng và mới lạ, đồng thời hỗ trợ các nỗ lực kỹ thuật protein bằng cách cung cấp cho các nhà khoa học các phương pháp để tạo và tìm kiếm các nhúng một cách nhanh chóng. Khi Metagenomi tiếp tục mở rộng nhanh chóng cơ sở dữ liệu protein và DNA, việc mở rộng theo chiều ngang được hỗ trợ bởi các phân chia cơ sở dữ liệu có thể được lập chỉ mục và tìm kiếm song song tạo điều kiện cho một giải pháp cơ sở dữ liệu nhúng có thể mở rộng theo nhu cầu trong tương lai.</p><p>Giải pháp được trình bày trong bài viết này tập trung vào các vectơ được tạo ra bởi <a href=https://aws.amazon.com/what-is/large-language-model/>mô hình ngôn ngữ lớn</a> protein (LLM) nhưng có thể được áp dụng cho các tập dữ liệu vectơ hóa khác. Để tìm hiểu thêm về LanceDB tích hợp với Amazon S3, vui lòng tham khảo <a href=https://lancedb.github.io/lancedb/>tài liệu LanceDB</a> .</p><p>Tài liệu tham khảo</p><ol><li><a href=https://www.biorxiv.org/content/10.1101/2024.09.23.614603v1>Fournier, Quentin và cộng sự. “Mô hình ngôn ngữ protein: có cần thiết phải mở rộng quy mô không?.” bioRxiv (2024): 2024-09.</a></li></ol><hr><h3 id=về-các-tác-giả><strong>Về các tác giả</strong></h3><div style="display:flex;align-items:flex-start;gap:20px;border:1px solid #ddd;padding:20px;border-radius:8px"><p><img src=https://d2908q01vomqb2.cloudfront.net/fc074d501302eb2b93e2554793fcaf50b3bf7291/2025/08/28/audra-devoto-metagenomi.jpeg alt="Audra Devoto" width=150 style=border-radius:4px></p><div style=max-width:600px><h3 id=audra-devoto><strong>Audra Devoto</strong></h3><p>Audra là một nhà khoa học dữ liệu có nền tảng về metagenomics và nhiều năm kinh nghiệm làm việc với các tập dữ liệu genomics lớn trên AWS. Tại Metagenomi, cô xây dựng cơ sở hạ tầng để hỗ trợ các dự án phân tích quy mô lớn và cho phép khám phá các enzyme mới từ MGXdb.</p></div></div><h3 id=heading></h3><div style="display:flex;align-items:flex-start;gap:20px;border:1px solid #ddd;padding:20px;border-radius:8px;margin-bottom:20px"><p><img src=https://d2908q01vomqb2.cloudfront.net/fc074d501302eb2b93e2554793fcaf50b3bf7291/2025/08/28/chris-brown-metagenomi.jpeg alt="Christopher Brown" width=150 style=border-radius:4px></p><div style=max-width:600px><h3 id=christopher-brown><strong>Christopher Brown</strong></h3><p>Tiến sĩ Christopher Brown là trưởng nhóm Discovery tại Metagenomi. Ông là một nhà khoa học và chuyên gia giàu kinh nghiệm trong lĩnh vực metagenomics, đồng thời là người dẫn đầu việc khám phá và mô tả đặc tính của nhiều hệ thống enzyme mới cho các ứng dụng chỉnh sửa gen.</p></div></div><h3 id=heading-1></h3><div style="display:flex;align-items:flex-start;gap:20px;border:1px solid #ddd;padding:20px;border-radius:8px;margin-bottom:20px"><p><img src=https://d2908q01vomqb2.cloudfront.net/fb644351560d8296fe6da332236b1f8d61b2828a/2024/04/05/Patrick-OConnor.jpeg alt="Patrick O'Connor" width=150 style=border-radius:4px></p><div style=max-width:600px><h3 id=patrick-oconnor><strong>Patrick O&rsquo;Connor</strong></h3><p>Patrick là Kỹ sư Nguyên mẫu AI Cấp cao Toàn cầu tại AWS, nơi anh xây dựng các giải pháp AI tạo sinh tiên tiến và các nguyên mẫu đầu cuối trên nền tảng đám mây. Anh chuyên triển khai các mô hình ngôn ngữ lớn và hệ thống AI phân tán, đồng thời vận dụng chuyên môn về IoT, công nghệ không máy chủ và điện toán hiệu năng cao để giải quyết các thách thức phức tạp của doanh nghiệp.</p></div></div><h3 id=heading-2></h3><div style="display:flex;align-items:flex-start;gap:20px;border:1px solid #ddd;padding:20px;border-radius:8px;margin-bottom:20px"><p><img src=https://d2908q01vomqb2.cloudfront.net/fc074d501302eb2b93e2554793fcaf50b3bf7291/2025/08/28/owen-janson-metagenomi.jpeg alt="Owen Janson" width=150 style=border-radius:4px></p><div style=max-width:600px><h3 id=owen-janson><strong>Owen Janson</strong></h3><p>Owen là Kỹ sư tin sinh học tại Metagenomi, chuyên xây dựng các công cụ và cơ sở hạ tầng đám mây để hỗ trợ phân tích các tập dữ liệu bộ gen khổng lồ.</p></div></div><h3 id=heading-3></h3><div style="display:flex;align-items:flex-start;gap:20px;border:1px solid #ddd;padding:20px;border-radius:8px;margin-bottom:20px"><p><img src=https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2025/09/16/Pavel.jpg alt="Pavel Novichkov" width=150 style=border-radius:4px></p><div style=max-width:600px><h3 id=pavel-novichkov><strong>Pavel Novichkov</strong></h3><p>Tiến sĩ Pavel Novichkov là Kiến trúc sư Giải pháp Cao cấp tại AWS, chuyên về hệ gen và khoa học sự sống. Ông có hơn 15 năm kinh nghiệm trong lĩnh vực tin sinh học và phát triển đám mây, giúp các công ty khởi nghiệp trong lĩnh vực chăm sóc sức khỏe và khoa học sự sống thiết kế và triển khai các giải pháp đám mây trên AWS. Ông đã hoàn thành nghiên cứu sau tiến sĩ tại Trung tâm Thông tin Công nghệ Sinh học Quốc gia (NIH) và làm việc với tư cách là Nhà khoa học Nghiên cứu Tính toán tại Phòng thí nghiệm Berkeley trong hơn 12 năm, nơi ông đồng phát triển công nghệ NGS tiên tiến, được công nhận là một trong 90 đột phá hàng đầu trong lịch sử của Phòng thí nghiệm Berkeley.</p></div></div><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=../../../vi/3-blogstranslated/3.2-blog2/ title="Blog 2"><i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=../../../vi/4-eventparticipated/ title="Các events đã tham gia" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=../../../js/clipboard.min.js?1765542844></script><script src=../../../js/perfect-scrollbar.min.js?1765542844></script><script src=../../../js/perfect-scrollbar.jquery.min.js?1765542844></script><script src=../../../js/jquery.sticky.js?1765542844></script><script src=../../../js/featherlight.min.js?1765542844></script><script src=../../../js/highlight.pack.js?1765542844></script><script>hljs.initHighlightingOnLoad()</script><script src=../../../js/modernizr.custom-3.6.0.js?1765542844></script><script src=../../../js/learn.js?1765542844></script><script src=../../../js/hugo-learn.js?1765542844></script><link href=../../../mermaid/mermaid.css?1765542844 rel=stylesheet><script src=../../../mermaid/mermaid.js?1765542844></script><script>mermaid.initialize({startOnLoad:!0})</script><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,(e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date),(i=t.createElement(n),a=t.getElementsByTagName(n)[0]),i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-158079754-2","auto"),ga("send","pageview")</script></body></html>
