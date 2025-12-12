@@ -1,32 +1,56 @@
 ---
-title : "Clean up"
-date : "2025-09-09"
-weight : 6
-chapter : false
-pre : " <b> 5.6. </b> "
+title: "Clean Up"
+date: "2025-11-11"
+weight: 6
+chapter: false
+pre: " <b> 5.6. </b> "
 ---
-Congratulations on completing this workshop! 
-In this workshop, you learned architecture patterns for accessing Amazon S3 without using the Public Internet. 
-+ By creating a gateway endpoint, you enabled direct communication between EC2 resources and Amazon S3, without traversing an Internet Gateway. 
-+ By creating an interface endpoint you extended S3 connectivity to resources running in your on-premises data center via AWS Site-to-Site VPN or Direct Connect. 
 
-#### clean up
-1. Navigate to Hosted Zones on the left side of Route 53 console. Click the name of *s3.us-east-1.amazonaws.com* zone. Click Delete and confirm deletion by typing delete. 
+To avoid unnecessary charges — especially from the **NAT Gateway** — you should remove all created resources after finishing the workshop.
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/delete-zone.png)
+Follow the steps below in order:
 
-2. Disassociate the Route 53 Resolver Rule - myS3Rule from "VPC Onprem" and Delete it. 
+---
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/vpc.png)
+### 9.1 Terminate EC2 Instances
 
-4. Open the CloudFormation console  and delete the two CloudFormation Stacks that you created for this lab:
-+ PLOnpremSetup
-+ PLCloudSetup
+1. Open **EC2 Console**
+2. Select both `EC2-Public` and `EC2-Private`
+3. Click **Instance state → Terminate** (This process may take some time)
+4. Confirm termination
 
-![delete stack](/images/5-Workshop/5.6-Cleanup/delete-stack.png)
+![EC2 instances termination](/images/5-Workshop/5.6-Cleanup/ec2-instance-termination.png)
 
-5. Delete S3 buckets
-+ Open S3 console
-+ Choose the bucket we created for the lab, click and confirm empty. Click delete and confirm delete.
+---
 
-![delete s3](/images/5-Workshop/5.6-Cleanup/delete-s3.png)
+### 9.2 Delete NAT Gateway
+
+1. Go to **VPC Console → NAT Gateways**
+2. Select `Workshop-NAT`
+3. Click **Actions → Delete NAT Gateway** (This process may take some time)
+4. Confirm the action
+
+> Wait until NAT Gateway shows as **Deleted** before moving on.
+
+![NAT Gateway deletion](/images/5-Workshop/5.6-Cleanup/NAT-termination.png)
+
+---
+
+### 9.3 Release Elastic IP
+
+After NAT Gateway is deleted:
+
+1. Go to **Elastic IPs**
+2. Select the allocated address
+3. Click **Actions** → **Release Elastic IP address**
+4. Confirm release (empty Elastic IP addresses list)
+
+---
+
+### 9.4 Detach and Delete Internet Gateway
+
+1. In **Internet Gateways**
+2. Select `Workshop-IGW`
+3. Click **Actions → Detach from VPC**
+4. Then **Actions → Delete Internet gateway**
+5. Confirm deletion (empty Internet gateways list)

@@ -1,18 +1,31 @@
 ---
-title : "Introduction"
-date :  "2025-09-09" 
-weight : 1 
-chapter : false
-pre : " <b> 5.1. </b> "
+title: "Introduction"
+date: "2025-11-11"
+weight: 1
+chapter: false
+pre: " <b> 5.1. </b> "
 ---
 
-#### VPC endpoints
-+ **VPC endpoints** are virtual devices. They are horizontally scaled, redundant, and highly available VPC components. They allow communication between your compute resources and AWS services without imposing availability risks.
-+ Compute resources running in VPC can access  **Amazon S3**  using a Gateway endpoint. PrivateLink interface endpoints can be used by compute resources running in VPC or on-premises.
+# Build a Basic AWS VPC with Public & Private Subnets
 
-#### Workshop overview
-In this workshop, you will use two VPCs. 
-+ **"VPC Cloud"** is for cloud resources such as a  **Gateway endpoint** and an EC2 instance to test with. 
-+ **"VPC On-Prem"** simulates an on-premises environment such as a factory or corporate datacenter. An EC2 instance running strongSwan VPN software has been deployed in "VPC On-prem" and automatically configured to establish a Site-to-Site VPN tunnel with AWS Transit Gateway. This VPN simulates connectivity from an on-premises location to the AWS cloud. To minimize costs, only one VPN instance is provisioned to support this workshop. When planning VPN connectivity for your production workloads, AWS recommends using multiple VPN devices for high availability.
+In this workshop, you will build a simple network foundation in AWS using **Amazon VPC (Virtual Private Cloud)**.
+The goal is to help beginners understand how networking works in the cloud, and how different components connect
+together to form a secure, controlled environment.
 
-![overview](/images/5-Workshop/5.1-Workshop-overview/diagram1.png)
+You will create a VPC with two subnets:
+
+- A **Public Subnet** – allows resources (like EC2 instances) to access the Internet directly.
+- A **Private Subnet** – isolated from the public Internet by default for better security.
+
+To enable the private subnet to download packages and access online services without being exposed publicly, you will
+configure:
+
+- An **Internet Gateway (IGW)** – allows public subnet traffic to flow to/from the Internet.
+- An **NAT Gateway** – lets instances in the private subnet access the Internet _indirectly_, without assigning a
+  public IP.
+
+By the end, you will spin up two EC2 instances — one in each subnet — and test communication between them while
+observing the role of routing and gateways.
+
+This hands-on workshop teaches essential AWS networking fundamentals through guided steps and console navigation.
+Perfect for beginners who want to build confidence working with VPCs.
